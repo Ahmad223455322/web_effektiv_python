@@ -6,7 +6,7 @@ from model import db, seedData
 
  
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:hejsan123@localhost/Bank'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:Ahmad123.@localhost/Bank'
 db.app = app
 db.init_app(app)
 migrate = Migrate(app,db)
@@ -23,6 +23,9 @@ def category(id):
     products = Product.query.all()
     return render_template("category.html", products=products)
 
+@app.route("/ahmad")
+def ommig():
+    return "<html><body><h1>Hej Jag Heter Ahmad</h1></body></html>"
 
 if __name__  == "__main__":
     with app.app_context():
