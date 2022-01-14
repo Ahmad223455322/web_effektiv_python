@@ -1,0 +1,174 @@
+{% extends 'basetemplate.html' %}
+
+{%block body%}
+  <header>
+    <a href="#" class="logo"><i class="fas fa-university"></i> Bitcoin Banken</a>
+    <nav class="navigation "> 
+      <a href="#Tjänster">Kunder</a>
+      <a href="#Projket">Konto</a>
+      <a href="#Summa">Summan</a>
+      <a href="#Kontakt">Kontakt</a>
+    
+
+    </nav>
+  </header>
+
+  <section class="main">
+ 
+    <div>
+      <h2> Välkommen till<br> <span> Skandinaviska Enskilda Banken AB</span> </h2>
+      <h3>Här hos oss hittar du bästa erbjudande på alla lån</h3>
+      
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/login/sv?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin"><i class="fab fa-linkedin"></i></a>
+        <a href="https://sv-se.facebook.com/"><i class="fab fa-facebook"></i></a>
+        <a href="https://github.com/login"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+   
+
+  </section>
+
+ 
+  <section class="kort" id="Tjänster">
+   
+    <div class="search-box ">
+      <input class="search-txt" type="search" placeholder="Search">
+      <a  href="#" class="search-btn">
+        <i class="fas fa-search"></i>
+      </a>
+    </div>
+  
+    <h2 class="title">Kund</h2>
+    <div class="content">
+        <div class="card">
+            <div class="icon">
+                <i class="fas fa-users"></i> 
+      </div>  
+            <div class="info">
+                <h3>Kund-Uppgifter</h3>
+                <p>ex ID</p>
+                <p>ex ID</p>
+                <p>ex ID</p>
+                <p>ex ID</p>
+        </div>
+      </div>
+      
+
+  </section>
+
+
+  <section class="Projket" id="Projket">
+
+    <div class="search-box ">
+      <input class="search-txt" type="search" placeholder="Search">
+      <a  href="#" class="search-btn">
+        <i class="fas fa-search"></i>
+      </a>
+    </div>
+
+    <h2 class="title">Konto</h2>
+    <div class="content">
+        <div class="card">
+            <div class="icon">
+              <i class="far fa-user-circle"></i>
+      </div>  
+            <div class="info">
+                <h3>Konto-transaktioner</h3>
+                <p>kontonummer</p>
+                <p>saldo</p>
+                <p>ex ID</p>
+                <p>ex ID</p>
+        </div>
+      </div>
+      
+
+
+  </section>
+
+
+
+  
+<!--   
+
+  <section class="Kundtabel" id="Tjänster">
+    <table>
+    <tr>
+        <th>ID</th>
+        <th>Förnamn</th>
+        <th>Efternamn</th>
+        <th>Adress</th>
+        <th> Stad</th>
+        <th>Land</th>
+        <th> Email</th>
+        <th>Telefon</th>
+        <th> Personnummer</th>
+    </tr>
+      {% for data in databas %}
+    <tr>
+        <td>{{data.Id}}</td>
+        <td>{{data.GivenName}}</td>
+        <td>{{data.Surname}}</td>
+        <td>{{data.Streetaddress}}</td>
+        <td>{{data.City}}</td>
+        <td>{{data.Country}}</td>
+        <td>{{data.EmailAddress}}</td>
+        <td>{{data.Telephone}}</td>
+        <td>{{data.Birthday}}</td>
+    </tr>
+      {% endfor %}
+
+    </table>
+  
+
+
+  </section> -->
+  <section class="kontotabel" id="Projket">
+    <table border="1" width="100%">
+      <th> ID </th>
+      <th>Kontotyp </th>
+      <th>Skapad</th>
+      <th>Balans</th>
+      <th>KundID</th>
+
+    </table>
+   
+  </section>
+  <section class="Summa" id="Summa" >
+
+
+
+    
+
+  </section>
+
+  <section class="kontakt" id="Kontakt">
+    <h2 class="title">Ta chansen och Kontakta oss</h2>
+    <div class="content">
+      <div class="card">
+          <div class="icon">
+              <i class="fas fa-phone"></i> 
+    </div>  
+          <div class="info">
+            <h3>Telefon</h3>
+            <p>+46720052161</p>
+          </div>
+    </div>
+    
+    
+      <div class="card">
+          <div class="icon">
+            <i class="fas fa-envelope"></i>
+          </div>  
+              <div class="info">
+                <h3>Email</h3>
+                <p>ahmad.zarzar@jodd.com.se</p>
+
+      </div>
+    </div>
+      
+    
+
+  </section>
+
+  {% endblock body %}
