@@ -8,7 +8,7 @@
 }
 
 header {
-    background-color: rosybrown;
+    background-color: #080808;
     width: 100%;
     position: fixed;
     z-index: 333;
@@ -21,15 +21,23 @@ header {
 
 .logo{
     text-decoration: none;
-    color: darkblue;
+    color: wheat;
     text-transform: uppercase;
     font-weight: 700;
     font-size: 1.8em;
 }
 
+.logo :hover{
+    color: darkred;
+}
+
+
+
+
+
 .navigation a{
     text-decoration: none;
-    color: darkblue;
+    color: wheat;
     font-size: 1.1em;
     font-weight: 500;
     padding: 20px;
@@ -100,7 +108,7 @@ section {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: url(bilder/bitcoin-g9d1fd7dd9_1920.jpg)no-repeat;
+    background: url(https://www.globalverificationnetwork.com/wp-content/uploads/2020/06/financial-01-01.jpg)no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -116,7 +124,7 @@ section {
 .main h2 span{
     display: inline-block;
     margin-top: 10px;
-    color: aqua;
+    color: beige;
     font-size: 2em;
     font-weight: 600;
 }
@@ -252,7 +260,7 @@ section {
    
 
 .Projket-bilder img{
-    width: 100;
+    width: 100%;
 }
 
 .Projket-info{
@@ -300,6 +308,7 @@ section {
     padding: 2em;
     display: flex;
     justify-content: space-between; 
+    background-size: cover;
 }
 
 

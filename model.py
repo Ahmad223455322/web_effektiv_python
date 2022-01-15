@@ -179,3 +179,6 @@ def addCat(db,namn,descr):
         c.Description = descr
         db.session.add(c)
         db.session.commit()
+
+
+        

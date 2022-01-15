@@ -1,0 +1,82 @@
+{% extends 'basetemplate.html' %}
+
+{%block body%}
+  <header>
+    <a href="#" class="logo"><i class="fas fa-university"></i> Bitcoin Banken</a>
+    
+    </nav>
+  </header>
+  <section class="Projket" id="Projket">
+    <h2 class="title">Statistik</h2>
+    <div class="content">
+       <div class="Projket-card">
+           <div class="Projket-bilder">
+               <img src="https://thl.fi/documents/10531/3376026/Tk-asiakkaat+2015-2020_SV_FINAL.png/347d6a79-10a7-e9c1-5877-7be0ab2c566d?t=1622524743817"/>
+               <div class="Projket-info">
+                 <p class="Projket-category">{{antalPersoner}}</p>
+                 <strong class="Projket-title">
+                     <span>Antla Kunder</span>
+                    
+
+                 </strong>
+
+               </div>
+
+           </div>
+        
+
+      </div>
+
+
+
+
+
+
+
+
+      <div class="Projket-card">
+        <div class="Projket-bilder">
+            <img src="https://resources.mynewsdesk.com/image/upload/ar_16:9,c_fill,dpr_auto,f_auto,g_auto,q_auto,w_864/istzdhtw2sroyyz7kmnd.jpg"/>
+            <div class="Projket-info">
+              <p class="Projket-category">{{antalkonto}}</p>
+              <strong class="Projket-title">
+                  <span>Antal Konto</span>
+                 
+
+              </strong>
+
+            </div>
+
+        </div>
+     
+
+   </div>
+
+   
+
+
+
+
+
+
+   <div class="Projket-card">
+    <div class="Projket-bilder">
+        <img src="https://docplayer.se/docs-images/51/17501225/images/page_9.jpg"/>
+        <div class="Projket-info">
+          <p class="Projket-category">{{Summary}}</p>
+          <strong class="Projket-title">
+              <span>Summan</span>
+             
+
+          </strong>
+
+        </div>
+
+    </div>
+ 
+
+</div>
+
+</section>
+
+  {% endblock body %}
