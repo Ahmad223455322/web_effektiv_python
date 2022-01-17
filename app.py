@@ -1,4 +1,4 @@
-from re import T
+from re import A, T
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, upgrade
@@ -16,9 +16,7 @@ migrate = Migrate(app,db)
 
 @app.route("/", methods=['GET', 'POST'])
 def startpage():
-    databas = Customer.query.all()
-    #trendingCategories = Category.query.all() trendingCategories=trendingCategories
-    return render_template("index.html", databas=databas)
+    return render_template("index.html")
 
 
 
@@ -36,10 +34,27 @@ def Statistik():
 
 @app.route("/loggain", methods=['GET', 'POST'])
 def loggain():
-    #trendingCategories = Category.query.all() trendingCategories=trendingCategories
     return render_template("loggain.html")
 
 
+
+
+
+
+
+@app.route("/Kundbild", methods=['GET', 'POST'])
+def kundbild():
+    databas = Customer.query.all()
+    return render_template("Kundbild.html",databas=databas)
+
+
+
+
+
+@app.route("/kontobild", methods=['GET', 'POST'])
+def kontobild():
+    konto = Account.query.all()
+    return render_template("Kontobild.html",konto=konto)
 
 
 
@@ -67,3 +82,19 @@ if __name__  == "__main__":
     app.run()
     seedData(db)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+#trendingCategories = Category.query.all() trendingCategories=trendingCategories
+#trendingCategories = Category.query.all() trendingCategories=trendingCategories
+#trendingCategories = Category.query.all() trendingCategories=trendingCategories

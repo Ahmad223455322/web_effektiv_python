@@ -1,0 +1,81 @@
+{% extends 'basetemplate.html' %}
+
+{%block body%}
+  
+<section class="kort">
+
+  <div class="search-box ">
+    <input class="search-txt" type="search" placeholder="Search">
+    <a  href="#" class="search-btn">
+      <i class="fas fa-search"></i>
+    </a>
+  </div>
+
+  <h2 class="title">Konto</h2>
+  <div class="content">
+      <div class="card">
+          <div class="icon">
+            <i class="far fa-user-circle"></i>
+    </div>  
+          <div class="info">
+              <h3>Konto-transaktioner</h3>
+              <table class="kontotabel"></table>
+                <tr>
+                    <th>ID</th>
+                    <th>Kontotyp</th>
+                    <th>Skapad</th>
+                    <th>Balans</th>
+                    <th>KundID</th>
+                </tr>
+                  {% for k in konto %}
+                <tr>
+                    <td>{{k.Id}}</td>
+                    <td>{{k.AccountType}}</td>
+                    <td>{{k.Created}}</td>
+                    <td>{{k.Balance}}</td>
+                    <td>{{k.CustomerId}}</td>
+                </tr>  
+                  {% endfor %}
+            
+                </table>
+              
+      </div>
+    </div>
+  </div>
+
+</section>
+
+  {% endblock body %}
+
+
+
+
+
+  
+  <section class="Projket" id="Projket">
+
+    <div class="search-box ">
+      <input class="search-txt" type="search" placeholder="Search">
+      <a  href="#" class="search-btn">
+        <i class="fas fa-search"></i>
+      </a>
+    </div>
+
+    <h2 class="title">Konto</h2>
+    <div class="content">
+        <div class="card">
+            <div class="icon">
+              <i class="far fa-user-circle"></i>
+      </div>  
+            <div class="info">
+                <h3>Konto-transaktioner</h3>
+                <p>kontonummer</p>
+                <p>saldo</p>
+                <p>ex ID</p>
+                <p>ex ID</p>
+        </div>
+      </div>
+      
+
+
+  </section>
