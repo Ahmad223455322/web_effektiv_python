@@ -21,17 +21,101 @@
               <h3>Kund-Uppgifter</h3>
               <table class="Kundtabel">
                 <tr>
-                    <th>ID</th>
-                    <th>Förnamn</th>
-                    <th>Efternamn</th>
-                    <th>Adress</th>
-                    <th> Stad</th>
-                    <th>Land</th>
-                    <th> Email</th>
-                    <th>Telefon</th>
-                    <th> Personnummer</th>
+                <th class="tabel-heder">ID
+                      <div class="icon-contener">
+                        <a  href="{{  url_for('kundbild',sortColumn='ID',sortOrder='asc' ) }}">
+                            <i class="fas fa-sort-up"></i>
+                        </a>
+                        <a href="{{  url_for('kundbild',sortColumn='ID',sortOrder='desc' ) }}">
+                            <i class="fas fa-sort-down"></i>
+                        </a>
+                      </div>
+                    </th>
+                <th class="tabel-heder">Förnamn
+                  <div class="icon-contener">
+                      <a  href="{{  url_for('kundbild',sortColumn='Förnamn',sortOrder='asc' ) }}">
+                          
+                        <i class="fas fa-sort-up"></i>
+                      </a>
+                      <a href="{{  url_for('kundbild',sortColumn='Förnamn',sortOrder='desc' ) }}">
+                        <i class="fas fa-sort-down"></i>
+                      </a>
+                  </div>    
+                </th>
+                <th class="tabel-heder">Efternamn
+                    <div class="icon-contener">
+                      <a  href="{{  url_for('kundbild',sortColumn='Efternamn',sortOrder='asc' ) }}">
+                        <i class="fas fa-sort-up"></i>
+                      </a>
+                      <a href="{{  url_for('kundbild',sortColumn='Efternamn',sortOrder='desc' ) }}">
+                         <i class="fas fa-sort-down"></i>
+                      </a>
+                    </div> 
+                </th>
+                <th class="tabel-heder">Adress
+                  <div class="icon-contener" >
+                      <a  href="{{  url_for('kundbild',sortColumn='Adress',sortOrder='asc' ) }}">
+                          <i class="fas fa-sort-up"></i>
+                      </a>
+                      <a href="{{  url_for('kundbild',sortColumn='Adress',sortOrder='desc' ) }}">
+                         <i class="fas fa-sort-down"></i>
+                      </a>
+                    </div>  
+                </th>
+                <th class="tabel-heder"> Stad
+                    <div class="icon-contener">
+                      
+                      <a  href="{{  url_for('kundbild',sortColumn='Stad',sortOrder='asc' ) }}">
+                            <i class="fas fa-sort-up"></i>
+                      </a>
+                      <a href="{{  url_for('kundbild',sortColumn='Stad',sortOrder='desc' ) }}">
+                            <i class="fas fa-sort-down"></i>
+                      </a>
+                    </div>  
+                </th>
+                <th class="tabel-heder">Land
+                  <div class="icon-contener"> 
+                      <a  href="{{  url_for('kundbild',sortColumn='Land',sortOrder='asc' ) }}">
+                          <i class="fas fa-sort-up"></i>
+                      </a>
+                      <a href="{{  url_for('kundbild',sortColumn='Land',sortOrder='desc' ) }}">
+                       <i class="fas fa-sort-down"></i>
+                      </a>
+                  </div>    
+                </th>
+                <th class="tabel-heder"> Email
+                  <div class="icon-contener">
+                     <a  href="{{  url_for('kundbild',sortColumn='Email',sortOrder='asc' ) }}">
+                          <i class="fas fa-sort-up"></i>
+                     </a>
+                     <a href="{{  url_for('kundbild',sortColumn='Email',sortOrder='desc' ) }}">
+                        <i class="fas fa-sort-down"></i>
+                     </a>
+                  </div>   
+                </th>
+                <th class="tabel-heder">Telefon
+                  <div class="icon-contener">
+                      <a  href="{{  url_for('kundbild',sortColumn='Telefon',sortOrder='asc' ) }}">
+                          <i class="fas fa-sort-up"></i>
+                      </a>
+                      
+                      <a href="{{  url_for('kundbild',sortColumn='Telefon',sortOrder='desc' ) }}">
+                          <i class="fas fa-sort-down"></i>
+                      </a>
+                  </div>    
+                </th>
+                <th class="tabel-heder"> Personnummer
+                  <div class="icon-contener">
+                      <a  href="{{  url_for('kundbild',sortColumn='Personnummer',sortOrder='asc' ) }}">
+                            <i class="fas fa-sort-up"></i>
+                      </a>
+                      <a href="{{  url_for('kundbild',sortColumn='Personnummer',sortOrder='desc' ) }}">
+                            <i class="fas fa-sort-down"></i>
+                      </a>
+                  </div>    
+                </th>
                 </tr>
-                  {% for data in databas %}
+                  {% for data in listOfCustomers %}
                 <tr>
                     <td>{{data.Id}}</td>
                     <td>{{data.GivenName}}</td>
@@ -42,6 +126,8 @@
                     <td>{{data.EmailAddress}}</td>
                     <td>{{data.Telephone}}</td>
                     <td>{{data.Birthday}}</td>
+                   
+                 
                 </tr>
                   {% endfor %}
             
