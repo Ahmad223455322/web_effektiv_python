@@ -1,4 +1,3 @@
-from re import A, T
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, upgrade
@@ -13,18 +12,101 @@ db.app = app
 db.init_app(app)
 migrate = Migrate(app,db)
 
+def sortering_transaktionerbild(sortColumn,sortOrder):
+   
+    allaPersoner = Transaction.query
 
 
-def sortering(sortColumn,sortOrder):
+    if sortColumn == "ID":
+        if sortOrder == "desc":
+            allaPersoner = allaPersoner.order_by(Transaction.Id.desc())
+        else:
+            allaPersoner = allaPersoner.order_by(Transaction.Id.asc())
 
-    if sortColumn == "" or sortColumn == None:
-        sortColumn = "namn"
+    if sortColumn == "Typ":
+        if sortOrder == "desc":
+            allaPersoner = allaPersoner.order_by(Transaction.Type.desc())
+        else:
+            allaPersoner = allaPersoner.order_by(Transaction.Type.asc())
 
-    if sortOrder == "" or sortOrder == None:
-        sortOrder = "asc"
+    
+    if sortColumn == "Operation":
+        if sortOrder == "desc":
+            allaPersoner = allaPersoner.order_by(Transaction.Operation.desc())
+        else:
+            allaPersoner = allaPersoner.order_by(Transaction.Operation.asc())
+         
+    
+    if sortColumn == "Datum":
+        if sortOrder == "desc":
+            allaPersoner = allaPersoner.order_by(Transaction.Date.desc())
+        else:
+            allaPersoner = allaPersoner.order_by(Transaction.Date.asc())
+    
+    if sortColumn == "Amount":
+        if sortOrder == "desc":
+            allaPersoner = allaPersoner.order_by(Transaction.Amount.desc())
+        else:
+            allaPersoner = allaPersoner.order_by(Transaction.Amount.asc())
+    
+    if sortColumn == "NewBalance":
+        if sortOrder == "desc":
+            allaPersoner = allaPersoner.order_by(Transaction.NewBalance.desc())
+        else:
+            allaPersoner = allaPersoner.order_by(Transaction.NewBalance.asc())
+    
+    if sortColumn == "AccountId":
+        if sortOrder == "desc":
+            allaPersoner = allaPersoner.order_by(Transaction.AccountId.desc())
+        else:
+            allaPersoner = allaPersoner.order_by(Transaction.AccountId.asc())                
 
-    activePage = "personerPage"
-    allaPersoner = Customer.query
+    return allaPersoner   
+
+def sortering_kontobild(sortColumn,sortOrder):
+   
+    allaPersoner = Account.query
+
+
+    if sortColumn == "ID":
+        if sortOrder == "desc":
+            allaPersoner = allaPersoner.order_by(Account.Id.desc())
+        else:
+            allaPersoner = allaPersoner.order_by(Account.Id.asc())
+
+    if sortColumn == "Kontotyp":
+        if sortOrder == "desc":
+            allaPersoner = allaPersoner.order_by(Account.AccountType.desc())
+        else:
+            allaPersoner = allaPersoner.order_by(Account.AccountType.asc())
+
+    
+    if sortColumn == "Skapad":
+        if sortOrder == "desc":
+            allaPersoner = allaPersoner.order_by(Account.Created.desc())
+        else:
+            allaPersoner = allaPersoner.order_by(Account.Created.asc())
+         
+    
+    if sortColumn == "Balans":
+        if sortOrder == "desc":
+            allaPersoner = allaPersoner.order_by(Account.Balance.desc())
+        else:
+            allaPersoner = allaPersoner.order_by(Account.Balance.asc())
+    
+    if sortColumn == "KundID":
+        if sortOrder == "desc":
+            allaPersoner = allaPersoner.order_by(Account.CustomerId.desc())
+        else:
+            allaPersoner = allaPersoner.order_by(Account.CustomerId.asc())
+    return allaPersoner    
+
+def sortering_kundbild(sortColumn,sortOrder, page, sök):
+    
+    allaPersoner = Customer.query.filter(Customer.Id.like(sök) |
+                   Customer.GivenName.like('%'+sök+'%')|
+                   Customer.City.like('%'+sök+'%'))
+  
 
 
     if sortColumn == "ID":
@@ -84,7 +166,10 @@ def sortering(sortColumn,sortOrder):
             allaPersoner = allaPersoner.order_by(Customer.Birthday.desc())
         else:
             allaPersoner = allaPersoner.order_by(Customer.Birthday.asc())
-    return allaPersoner
+           
+    paginationObject = allaPersoner.paginate(page,50,False)
+
+    return paginationObject
  
  
 
@@ -118,12 +203,23 @@ def loggain():
 
 @app.route("/Kundbild", methods=['GET', 'POST'])
 def kundbild():
-    # listOfCustomers = Customer.query.limit(50).all()
-    sortColumn = request.args.get('sortColumn')
-    sortOrder = request.args.get('sortOrder')
-    listOfCustomers=sortering(sortColumn,sortOrder)
+    
+    page=int(request.args.get('page','1'))   
+    sök=request.args.get('sök','')
+    sortColumn = request.args.get('sortColumn','ID')
+    sortOrder = request.args.get('sortOrder','asc')
+    
+    paginationObject=sortering_kundbild(sortColumn,sortOrder, page, sök)
     databas = Customer.query.all()
-    return render_template("Kundbild.html",databas=databas,listOfCustomers=listOfCustomers)
+    return render_template("Kundbild.html",
+                    databas=databas,
+                    listOfCustomers=paginationObject.items, 
+                    page=page,sortColumn=sortColumn,
+                    sortOrder=sortOrder,
+                    sök=sök,
+                    has_next=paginationObject.has_next,
+                    has_prev=paginationObject.has_prev, 
+                    pages=paginationObject.pages)
 
 
 
@@ -131,13 +227,33 @@ def kundbild():
 
 @app.route("/kontobild", methods=['GET', 'POST'])
 def kontobild():
-    konto = Account.query.all()
-    return render_template("Kontobild.html",konto=konto)
+    sortColumn = request.args.get('sortColumn','ID')
+    sortOrder = request.args.get('sortOrder','asc')
+    sort= sortering_kontobild(sortColumn,sortOrder)
+    id = request.args.get('id')
+    valtkund= Customer.query.get(id)
+    kontolist= db.session.query(Customer, Account).join(Account).where(Account.CustomerId == id).all()
+    summan = db.session.query(func.sum(Account.Balance)).filter(Account.CustomerId == id).all()
+    return render_template("kontobild.html",kontolist=kontolist,sort=sort, valtkund = valtkund, summan = summan[0][0])
 
 
 
 
 
+
+
+@app.route("/transaktionerbild", methods=['GET', 'POST'])
+def transaktionerbild():
+    sortColumn = request.args.get('sortColumn','ID')
+    sortOrder = request.args.get('sortOrder','asc')
+    sort= sortering_transaktionerbild(sortColumn,sortOrder)
+    
+    id = request.args.get('id')
+    valtkonto= Account.query.get(id)
+    transaktioner= db.session.query(Account,Transaction).join(Transaction).where(Transaction.AccountId == id).all()
+    # transaktioner = Transaction.query.filter(Transaction.AccountId==id)
+    
+    return render_template("transaktionerbild.html",transaktioner=transaktioner,sort=sort,valtkonto=valtkonto)
 
 
 

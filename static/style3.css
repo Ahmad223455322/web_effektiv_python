@@ -40,7 +40,7 @@ header {
     color: wheat;
     font-size: 1.1em;
     font-weight: 500;
-    padding: 20px;
+    padding: 11px;
 
 }
 .navigation a:hover{
@@ -79,6 +79,23 @@ header {
 
 
 }
+
+
+.visa-btn{
+    text-decoration: none;
+    color: #e84118;
+    float: right;
+    width: 40px;
+    height: 30px;
+    border-radius: 200%;
+    background:black;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+
+
+}
+
 
 
 .search-box{
@@ -315,6 +332,9 @@ section {
     justify-content: space-between; 
     background-size: cover;
 }
+
+
+
 .tabel-heder{
    display: flexbox;
    flex-direction:row;
@@ -329,7 +349,6 @@ section {
 .icon-contener{
     display: flex;
     flex-direction: column;
-    
    
 }
 
