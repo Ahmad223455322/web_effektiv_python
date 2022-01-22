@@ -16,11 +16,11 @@
   <div class="content">
       <div class="card">
           <div class="icon">
-            <i class="far fa-user-circle"></i>
+            <i class="fas fa-comments-dollar"></i>
     </div>  
           <div class="info">
               <h3>Konto-transaktioner</h3>
-              <table class="kontotabel">
+              <table class="customers">
                 <tr>
                     <th class="tabel-heder">ID
                       <div class="icon-contener">
@@ -31,6 +31,7 @@
                               <i class="fas fa-sort-down"></i>
                           </a>
                       </div>
+                    </th>  
                     <th class="tabel-heder">Typ
                       <div class="icon-contener">
                           <a  href="{{  url_for('transaktionerbild',sortColumn='Typ',sortOrder='asc' ) }}">
@@ -40,6 +41,7 @@
                               <i class="fas fa-sort-down"></i>
                           </a>
                       </div>
+                    </th>  
                       
                     <th class="tabel-heder">Operation
                         <div class="icon-contener">
@@ -50,6 +52,7 @@
                                 <i class="fas fa-sort-down"></i>
                             </a>
                         </div>
+                    </th>    
                     <th class="tabel-heder">Datum
                         <div class="icon-contener">
                             <a  href="{{  url_for('transaktionerbild',sortColumn='Datum',sortOrder='asc' ) }}">
@@ -59,6 +62,7 @@
                                 <i class="fas fa-sort-down"></i>
                             </a>
                         </div>
+                    </th>    
                     <th class="tabel-heder">Amount
                         <div class="icon-contener">
                             <a  href="{{  url_for('transaktionerbild',sortColumn='Amount',sortOrder='asc' ) }}">
@@ -68,6 +72,7 @@
                                 <i class="fas fa-sort-down"></i>
                             </a>
                         </div>
+                    </th>    
                         <th class="tabel-heder">NewBalance
                             <div class="icon-contener">
                                 <a  href="{{  url_for('transaktionerbild',sortColumn='NewBalance',sortOrder='asc' ) }}">
@@ -77,6 +82,7 @@
                                     <i class="fas fa-sort-down"></i>
                                 </a>
                             </div>
+                        </th>    
 
                             <th class="tabel-heder">AccountId
                                 <div class="icon-contener">
@@ -87,6 +93,7 @@
                                         <i class="fas fa-sort-down"></i>
                                     </a>
                                 </div>
+                            </th>    
 
                             <th class="tabel-heder">Balance
                                 <div class="icon-contener">
@@ -97,28 +104,29 @@
                                         <i class="fas fa-sort-down"></i>
                                     </a>
                                 </div>
+                            </th>    
             
     
 
 
                 </tr>
                 
-                 
-                {% for k,t in transaktioner %}
-                  
-                <tr>
-                    <td>{{t.Id}} <a class="search-btn" href="{{ url_for('transaktionerbild',id = t.Id) }}">Visa</a></td>
-                    <td>{{t.Type}}</td>
-                    <td>{{t.Operation}}</td>
-                    <td>{{t.Date}}</td>
-                    <td>{{t.Amount}}</td>
-                    <td>{{t.NewBalance}}</td>
-                    <td>{{t.AccountId}}</td>
-                    <td>{{k.Balance}}</td>
-                </tr>  
-                {% endfor %}
+                    
+                    {% for k,t in transaktioner %}
+                    
+                    <tr>
+                        <td> <a class="search-btn" href="{{ url_for('transaktionerbild',id = t.Id) }}">{{t.Id}}</a></td>
+                        <td>{{t.Type}}</td>
+                        <td>{{t.Operation}}</td>
+                        <td>{{t.Date}}</td>
+                        <td>{{t.Amount}}</td>
+                        <td>{{t.NewBalance}}</td>
+                        <td>{{t.AccountId}}</td>
+                        <td>{{k.Balance}}</td>
+                    </tr>  
+                    {% endfor %}
+                    
                 
-               
             
                 </table>
               

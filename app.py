@@ -251,8 +251,6 @@ def transaktionerbild():
     id = request.args.get('id')
     valtkonto= Account.query.get(id)
     transaktioner= db.session.query(Account,Transaction).join(Transaction).where(Transaction.AccountId == id).all()
-    # transaktioner = Transaction.query.filter(Transaction.AccountId==id)
-    
     return render_template("transaktionerbild.html",transaktioner=transaktioner,sort=sort,valtkonto=valtkonto)
 
 

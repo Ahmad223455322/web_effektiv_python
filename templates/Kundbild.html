@@ -32,7 +32,7 @@
     </div>  
           <div class="info">
               <h3>Kund-Uppgifter</h3>
-              <table class="Kundtabel">
+              <table class="customers">
                 <tr>
                 <th class="tabel-heder">ID
                       <div class="icon-contener">
@@ -131,7 +131,7 @@
 
                   {% for data in listOfCustomers %}
                 <tr>
-                    <td>{{data.Id}} <a class="search-btn" href="{{ url_for('kontobild',id = data.Id, sortColumn=sortColumn, sortOrder=sortOrder,sök=sök) }}">Visa</a> </td>
+                    <td><a class="search-btn" href="{{ url_for('kontobild',id = data.Id, sortColumn=sortColumn, sortOrder=sortOrder,sök=sök) }}">{{data.Id}} </a> </td>
                     <td>{{data.GivenName}}</td>
                     <td>{{data.Surname}}</td>
                     <td>{{data.Streetaddress}}</td>
