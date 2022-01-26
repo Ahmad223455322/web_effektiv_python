@@ -1,13 +1,16 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, upgrade
 from model import db, seedData, Customer,Account,Transaction
 from sqlalchemy.sql import func
+from form import Instätning,Överförnig
+from datetime import datetime
 
 
  
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:Ahmad123.@localhost/Bank'
+app.config["SECRET_KEY"]= 'SDFA11#'
 db.app = app
 db.init_app(app)
 migrate = Migrate(app,db)
@@ -200,6 +203,94 @@ def loggain():
 
 
 
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    return render_template("register.html")
+
+
+
+
+
+@app.route("/överföring", methods=['GET', 'POST'])
+def överföring():
+    
+    form= Överförnig(request.form)
+    if form.validate_on_submit():
+        överföring_1=Account.query.get(form.från.data)
+        överföring_2=Account.query.get(form.till.data)
+        if överföring_1 and överföring_2:
+            nyöverföring_1= Transaction()
+            nyöverföring_2= Transaction()
+            belopp=form.belopp.data
+            nyvärde_1=överföring_1.Balance-belopp
+            nyvärde_2=överföring_2.Balance+belopp
+            nyöverföring_1.Type ="Debit"
+            nyöverföring_1.Operation="Transfer"
+            nyöverföring_1.Date=datetime.now()
+            nyöverföring_1.Amount=belopp
+            nyöverföring_1.NewBalance=nyvärde_1
+            nyöverföring_1.AccountId=överföring_1.Id
+            överföring_1.Balance= nyvärde_1
+
+            nyöverföring_2.Type ="Debit"
+            nyöverföring_2.Operation="Transfer"
+            nyöverföring_2.Date=datetime.now()
+            nyöverföring_2.Amount=belopp
+            nyöverföring_2.NewBalance=nyvärde_2
+            nyöverföring_2.AccountId=överföring_2.Id
+            överföring_2.Balance= nyvärde_2
+            
+           
+          
+            db.session.add(nyöverföring_1)
+            db.session.add(nyöverföring_2)
+            db.session.commit()
+            return redirect(url_for('överföring',form=form))    
+    return render_template('överföring.html',form=form)
+    
+
+
+
+
+@app.route("/insätning", methods=['GET', 'POST'])
+def insätning():
+    
+    form= Instätning(request.form)    
+    if form.validate_on_submit():
+        konto=Account.query.get( form.från.data)
+        if konto:
+            nytransktion= Transaction()
+            val=form.val.data
+            belopp=form.belopp.data
+            if val== "i":
+                nyvärde=konto.Balance+belopp
+                nytransktion.Type ="Debit"
+                nytransktion.Operation=val
+                nytransktion.Date=datetime.now()
+                nytransktion.Amount=belopp
+                nytransktion.NewBalance=nyvärde
+                nytransktion.AccountId=konto.Id
+                konto.Balance= nyvärde
+                db.session.add(nytransktion)
+                db.session.commit()
+           
+          
+            elif val== "u":
+                nyvärde=konto.Balance-belopp
+                nytransktion.Type ="Debit"
+                nytransktion.Operation=val
+                nytransktion.Date=datetime.now()
+                nytransktion.Amount=belopp
+                nytransktion.NewBalance=nyvärde
+                nytransktion.AccountId=konto.Id
+                konto.Balance= nyvärde
+                db.session.add(nytransktion)
+                db.session.commit()
+            return redirect(url_for('insätning',form=form))    
+    return render_template('insättning.html',form=form)
+    
+
+
 
 @app.route("/Kundbild", methods=['GET', 'POST'])
 def kundbild():
@@ -234,8 +325,9 @@ def kontobild():
     valtkund= Customer.query.get(id)
     kontolist= db.session.query(Customer, Account).join(Account).where(Account.CustomerId == id).all()
     summan = db.session.query(func.sum(Account.Balance)).filter(Account.CustomerId == id).all()
-    return render_template("kontobild.html",kontolist=kontolist,sort=sort, valtkund = valtkund, summan = summan[0][0])
-
+    FÖRNAMN = db.session.query(Customer.GivenName).filter(Customer.Id==id).all()
+    return render_template("kontobild.html",kontolist=kontolist,sort=sort, 
+    valtkund = valtkund, summan = summan[0][0],FÖRNAMN=FÖRNAMN[0][0])
 
 
 
@@ -251,7 +343,8 @@ def transaktionerbild():
     id = request.args.get('id')
     valtkonto= Account.query.get(id)
     transaktioner= db.session.query(Account,Transaction).join(Transaction).where(Transaction.AccountId == id).all()
-    return render_template("transaktionerbild.html",transaktioner=transaktioner,sort=sort,valtkonto=valtkonto)
+    Saldo = db.session.query(Account.Balance).filter(Account.Id==id).all()
+    return render_template("transaktionerbild.html",transaktioner=transaktioner,sort=sort,valtkonto=valtkonto,Saldo=Saldo[0][0])
 
 
 
