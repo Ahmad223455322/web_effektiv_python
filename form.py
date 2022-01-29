@@ -7,27 +7,28 @@ from model import Account
 
 
 class Instätning(FlaskForm):
-    från = IntegerField("Från",[validators.NumberRange(min=1,max=6000,message="Skriv rätt kontonummer!!")])
-    val = SelectField("Välj", choices=[('', 'Välj'),('i', 'insättning'), ('u', 'uttag')] ,validators=validators.DataRequired()) 
+    från = IntegerField("Konto-nummer",[validators.DataRequired(message="Detta fält måste vara fyllt"),validators.NumberRange(min=1,max=5776,message="Skriv kontonummer mellan *.. & ****.. siffra.")])
+    val = SelectField("Välj-Operation", choices=[('', 'Välj'),('deposit', 'insättning'), ('withdraw', 'uttag')]) 
     belopp = IntegerField("Belopp",[validators.NumberRange(min=1,max=15000,message="Max belopp är 15000 Kr!!")])
 
-    def validate_från(self,från):
-        kund = Account.query.filter(Account.Id==från.data).first()
-        if kund == None:
-            raise validators.ValidationError("Kontot finns inte i databas")
-        # if form.belopp.data== "" and från.data > cgossenaccoundt.balcac
+    def validate_belopp(form,från):
+        från=Account.query.get(form.från.data)
+        belopp=form.belopp.data
+        if belopp > från.Balance:
+            raise validators.ValidationError("Beloppet är större än saldo")
+       
         
 
 
 
 class Överförnig(FlaskForm):
-    från = IntegerField("Från",[validators.NumberRange(min=1,max=4,message="Skriv rätt kontonummer!!")])
-    till = IntegerField("Till",[validators.NumberRange(min=1,max=4,message="Skriv rätt kontonummer!!")])
+    från = IntegerField("Från-Konto",[validators.NumberRange(min=1,max=5776,message="Skriv kontonummer mellan *.. & ****.. siffra.")])
+    till = IntegerField("Till-Konto",[validators.NumberRange(min=1,max=5776,message="Skriv kontonummer mellan *.. & ****.. siffra.")])
     belopp = IntegerField("Belopp",[validators.NumberRange(min=1,max=15000,message="Max belopp är 15000 Kr!!")])
 
-    def validate_från(self,från):
-        kund = Account.query.filter(Account.Id==från.data).first()
-        if kund == None:
-            raise validators.ValidationError("Kontot finns inte i databas")
-        # if form.belopp.data== "" and från.data > cgossenaccoundt.balcac
-        
+    def validate_belopp(form,från):
+        från=Account.query.get(form.från.data)
+        belopp=form.belopp.data
+        if belopp > från.Balance:
+            raise validators.ValidationError("Beloppet är större än saldo")
+       

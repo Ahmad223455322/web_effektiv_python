@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request,redirect,url_for
+import bdb
+from flask import Flask, render_template, request,redirect, session,url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, upgrade
-from model import db, seedData, Customer,Account,Transaction
+from model import db, seedData, Customer,Account,Transaction,user_manager,User
 from sqlalchemy.sql import func
 from form import Instätning,Överförnig
 from datetime import datetime
@@ -9,11 +10,20 @@ from datetime import datetime
 
  
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:Ahmad123.@localhost/Bank'
-app.config["SECRET_KEY"]= 'SDFA11#'
+app.config.from_object('config.ConfigDebug')
 db.app = app
 db.init_app(app)
 migrate = Migrate(app,db)
+user_manager.app = app
+user_manager.init_app(app,db,User)
+
+
+
+
+
+
+
+
 
 def sortering_transaktionerbild(sortColumn,sortOrder):
    
@@ -262,7 +272,7 @@ def insätning():
             nytransktion= Transaction()
             val=form.val.data
             belopp=form.belopp.data
-            if val== "i":
+            if val== "deposit":
                 nyvärde=konto.Balance+belopp
                 nytransktion.Type ="Debit"
                 nytransktion.Operation=val
@@ -275,7 +285,7 @@ def insätning():
                 db.session.commit()
            
           
-            elif val== "u":
+            elif val== "withdraw":
                 nyvärde=konto.Balance-belopp
                 nytransktion.Type ="Debit"
                 nytransktion.Operation=val
@@ -363,9 +373,10 @@ def category(id):
 if __name__  == "__main__":
     with app.app_context():
         upgrade()
-    
+        seedData()
+       
+        
     app.run()
-    seedData(db)
 
 
 
