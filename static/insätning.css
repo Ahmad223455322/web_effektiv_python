@@ -3,7 +3,7 @@ body {
 }
 
 .card {
-    width: 400px;
+    width: 800px;
     background-color: #fff;
     border: none;
     border-radius: 12px
@@ -80,3 +80,9 @@ label.radio input:checked+span {
     line-height: 27px;
     width: 111px;
 }
+
+.container{
+    display:flex;
+    justify-content: center;
+}
+

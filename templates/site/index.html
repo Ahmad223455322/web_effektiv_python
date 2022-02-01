@@ -2,21 +2,30 @@
 
 {%block body%}
   <header>
-    <a href="http://127.0.0.1:5000/index.html" class="logo"><i class="fas fa-university"></i> Bitcoin Banken</a>
+    <a href="#" class="logo"><i class="fas fa-university"></i> Bitcoin Banken</a>
     <nav class="navigation "> 
-      <a href="Statistik.html">Statisik</a>
-      <a href="http://127.0.0.1:5000/Kundbild">Kund</a>
-      <a href="http://127.0.0.1:5000/loggain">Login</a>
+      
+      
+      {%  if current_user.is_authenticated  %}
+      <a href="{{url_for('site.Statistik')}}">Statisik</a>
+      <a href="{{url_for('customer.kundbild')}}">Kund</a>
+      <a href="{{ url_for('user.logout') }}">Logout</a>
+      {%  else  %}
+      <a href="{{ url_for('user.login') }}">Login</a>
+      <a href="{{ url_for('user.register') }}">Registera</a>
       <a href="#Kontakt">Kontakt</a>
+      
+      {%  endif %}
+      
     
-
+      
     </nav>
   </header>
 
   <section class="main">
  
     <div>
-      <h2> Välkommen till<br> <span> Skandinaviska Enskilda Banken AB</span> </h2>
+      <h2> Välkommen {{current_user.first_name}}<br> <span> Skandinaviska Enskilda Banken AB</span> </h2>
       <h3>Här hos oss hittar du bästa erbjudande på alla lån</h3>
       
       <div class="social-icons">

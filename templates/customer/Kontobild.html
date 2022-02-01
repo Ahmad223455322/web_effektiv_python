@@ -4,9 +4,9 @@
 <header>
     <a href="#" class="logo"><i class="fas fa-university"></i> Bitcoin Banken</a>
       <nav class="navigation ">
-        <a href="{{url_for('insätning')}}">insättning</a>
+        <a href="{{url_for('customer.insätning')}}">Insättning/Uttag</a>
         
-        <a href="{{url_for('överföring')}}">överföringar</a>
+        <a href="{{url_for('customer.överföring')}}">Överföringar</a>
        
         
       
@@ -29,20 +29,20 @@
                 <tr>
                     <th class="tabel-heder">ID
                       <div class="icon-contener">
-                          <a  href="{{  url_for('kontobild',sortColumn='ID',sortOrder='asc' ) }}">
+                          <a  href="{{  url_for('customer.kontobild',sortColumn='ID',sortOrder='asc' ) }}">
                               <i class="fas fa-sort-up"></i>
                           </a>
-                          <a href="{{  url_for('kontobild',sortColumn='ID',sortOrder='desc' ) }}">
+                          <a href="{{  url_for('customer.kontobild',sortColumn='ID',sortOrder='desc' ) }}">
                               <i class="fas fa-sort-down"></i>
                           </a>
                       </div>
                     </th>  
                     <th class="tabel-heder">Kontotyp
                       <div class="icon-contener">
-                          <a  href="{{  url_for('kontobild',sortColumn='Kontotyp',sortOrder='asc' ) }}">
+                          <a  href="{{  url_for('customer.kontobild',sortColumn='Kontotyp',sortOrder='asc' ) }}">
                               <i class="fas fa-sort-up"></i>
                           </a>
-                          <a href="{{  url_for('kontobild',sortColumn='Kontotyp',sortOrder='desc' ) }}">
+                          <a href="{{  url_for('customer.kontobild',sortColumn='Kontotyp',sortOrder='desc' ) }}">
                               <i class="fas fa-sort-down"></i>
                           </a>
                       </div>
@@ -50,30 +50,30 @@
                       
                     <th class="tabel-heder">Skapad
                         <div class="icon-contener">
-                            <a  href="{{  url_for('kontobild',sortColumn='Skapad',sortOrder='asc' ) }}">
+                            <a  href="{{  url_for('customer.kontobild',sortColumn='Skapad',sortOrder='asc' ) }}">
                                 <i class="fas fa-sort-up"></i>
                             </a>
-                            <a href="{{  url_for('kontobild',sortColumn='Skapad',sortOrder='desc' ) }}">
+                            <a href="{{  url_for('customer.kontobild',sortColumn='Skapad',sortOrder='desc' ) }}">
                                 <i class="fas fa-sort-down"></i>
                             </a>
                         </div>
                     </th>    
                     <th class="tabel-heder">Balans
                         <div class="icon-contener">
-                            <a  href="{{  url_for('kontobild',sortColumn='Balans',sortOrder='asc' ) }}">
+                            <a  href="{{  url_for('customer.kontobild',sortColumn='Balans',sortOrder='asc' ) }}">
                                 <i class="fas fa-sort-up"></i>
                             </a>
-                            <a href="{{  url_for('kontobild',sortColumn='Balans',sortOrder='desc' ) }}">
+                            <a href="{{  url_for('customer.kontobild',sortColumn='Balans',sortOrder='desc' ) }}">
                                 <i class="fas fa-sort-down"></i>
                             </a>
                         </div>
                     </th>    
                     <th class="tabel-heder">KundID
                         <div class="icon-contener">
-                            <a  href="{{  url_for('kontobild',sortColumn='KundID',sortOrder='asc' ) }}">
+                            <a  href="{{  url_for('customer.kontobild',sortColumn='KundID',sortOrder='asc' ) }}">
                                 <i class="fas fa-sort-up"></i>
                             </a>
-                            <a href="{{  url_for('kontobild',sortColumn='KundID',sortOrder='desc' ) }}">
+                            <a href="{{  url_for('customer.kontobild',sortColumn='KundID',sortOrder='desc' ) }}">
                                 <i class="fas fa-sort-down"></i>
                             </a>
                         </div>
@@ -88,7 +88,7 @@
                 {% for data,k in kontolist %}
                   
                 <tr>
-                    <td><a class="search-btn" href="{{ url_for('transaktionerbild',id = k.Id) }}">{{k.Id}} </a></td>
+                    <td><a class="search-btn" href="{{ url_for('customer.transaktionerbild',id = k.Id) }}">{{k.Id}} </a></td>
                     <td>{{k.AccountType}}</td>
                     <td>{{k.Created}}</td>
                     <td>{{k.Balance}}</td>
