@@ -15,7 +15,7 @@ customerBlueprint = Blueprint('customer', __name__)
 
 
 @customerBlueprint.route("/överföring", methods=['GET', 'POST'])
-@roles_required("Admin")
+# @roles_required("Admin")
 def överföring():
     
     form= Överförnig(request.form)
@@ -49,7 +49,7 @@ def överföring():
             db.session.add(nyöverföring_1)
             db.session.add(nyöverföring_2)
             db.session.commit()
-            return redirect(url_for('överföring',form=form))    
+            return redirect(url_for('customer.överföring',form=form))    
     return render_template('customer/överföring.html',form=form)
     
 
@@ -57,7 +57,7 @@ def överföring():
 
 
 @customerBlueprint.route("/insätning", methods=['GET', 'POST'])
-@roles_required("Admin")
+# @roles_required("Admin")
 def insätning():
   
     
@@ -92,14 +92,14 @@ def insätning():
                 konto.Balance= nyvärde
                 db.session.add(nytransktion)
                 db.session.commit()
-            return redirect(url_for('insätning',form=form))    
+            return redirect(url_for('customer.insätning',form=form))    
     return render_template('customer/insättning.html',form=form)
     
 
 
 
 @customerBlueprint.route("/Kundbild", methods=['GET', 'POST'])
-@roles_accepted("Admin","Cashier")
+# @roles_accepted("Admin","Cashier")
 def kundbild():
     
     page=int(request.args.get('page','1'))   
@@ -125,7 +125,7 @@ def kundbild():
 
 
 @customerBlueprint.route("/kontobild", methods=['GET', 'POST'])
-@roles_accepted("Admin","Cashier")
+# @roles_accepted("Admin","Cashier")
 def kontobild():
     sortColumn = request.args.get('sortColumn','ID')
     sortOrder = request.args.get('sortOrder','asc')
@@ -141,7 +141,7 @@ def kontobild():
 
 
 @customerBlueprint.route("/transaktionerbild", methods=['GET', 'POST'])
-@roles_accepted("Admin","Cashier")
+# @roles_accepted("Admin","Cashier")
 def transaktionerbild():
     sortColumn = request.args.get('sortColumn','ID')
     sortOrder = request.args.get('sortOrder','asc')

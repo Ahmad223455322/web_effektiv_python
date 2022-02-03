@@ -7,18 +7,18 @@ class AccountTestCases(unittest.TestCase):
     def setUp(self):
         self.ctx = app.app_context()
         self.ctx.push()
-        app.config["SERVER_NAME"] = "stefan.se"
+        app.config["SERVER_NAME"] = "Hej.se"
         app.config['WTF_CSRF_ENABLED'] = False
         app.config['WTF_CSRF_METHODS'] = []  # This is the magic
         app.config['TESTING'] = True
 
 
 
-    def test_när_inte_går_att_ta_ut_eller(self):
+    def test_när_inte_går_att_ta_ut_än_perngar_som_finns_på_kontot(self):
         test_client = app.test_client()
         url = '/insätning'
         with test_client:
-            response = test_client.post(url, data={ "från":"12", "val":"withdraw", "belopp":"11122" })
+            response = test_client.post(url, data={ "från":"1", "val":"withdraw", "belopp":"16000" })
             assert response.status_code == 302
 
 
@@ -28,8 +28,8 @@ class AccountTestCases(unittest.TestCase):
         test_client = app.test_client()
         url = '/insätning'
         with test_client:
-            response = test_client.post(url, data={"från":"12", "val":"deposit", "belopp":"11122"  })
-            assert response.status_code == 302
+            response = test_client.post(url, data={"från":"1", "val":"deposit", "belopp":"16000"  })
+            assert response.status_code != 302
 
    
    
@@ -37,8 +37,8 @@ class AccountTestCases(unittest.TestCase):
         test_client = app.test_client()
         url = '/överföring'
         with test_client:
-            response = test_client.post(url, data={ "från":"12", "till":"13", "belopp":"11122" })
-            assert response.status_code == 302
+            response = test_client.post(url, data={ "från":"1", "till":"13", "belopp":"16000" })
+            assert response.status_code != 302
 
 
 
@@ -46,8 +46,18 @@ class AccountTestCases(unittest.TestCase):
         test_client = app.test_client()
         url = '/insätning'
         with test_client:
-            response = test_client.post(url, data={"från":"12", "val":"withdraw", "belopp":"11122"  })
+            response = test_client.post(url, data={"från":"1", "val":"withdraw", "belopp":"-5"  })
+            assert response.status_code != 302
+
+   
+
+    def test_när_går_att_ta_ut_godkönd_belopp(self):
+        test_client = app.test_client()
+        url = '/insätning'
+        with test_client:
+            response = test_client.post(url, data={"från":"1", "val":"deposit", "belopp":"5"  })
             assert response.status_code == 302
+
 
 
 

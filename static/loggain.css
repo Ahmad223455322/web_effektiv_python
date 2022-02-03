@@ -1,13 +1,13 @@
 /* Bordered form */
 body{
-    background-color:burlywood;
+    background-color:darkgray;
 }
 form {
     margin-top: 50px;
     margin-bottom: 50px;
     margin-left: 400px;
-    border: 3px solid #f1f1f1;
-    background-color: beige;
+    border: 3px solid #a54f4f;
+    background-color: burlywood;
     width: 50%;
     height: 50%;
   }
