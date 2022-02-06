@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,request,redirect, session,url_for
+from flask import Blueprint,render_template,request,redirect, session,url_for,flash
 from flask_user import roles_required,roles_accepted
 from model import db, Customer,Account,Transaction
 from sqlalchemy.sql import func
@@ -92,6 +92,7 @@ def insätning():
                 konto.Balance= nyvärde
                 db.session.add(nytransktion)
                 db.session.commit()
+                flash('tack')
             return redirect(url_for('customer.insätning',form=form))    
     return render_template('customer/insättning.html',form=form)
     
@@ -136,7 +137,7 @@ def kontobild():
     summan = db.session.query(func.sum(Account.Balance)).filter(Account.CustomerId == id).all()
     FÖRNAMN = db.session.query(Customer.GivenName).filter(Customer.Id==id).all()
     return render_template("customer/kontobild.html",kontolist=kontolist,sort=sort, 
-    valtkund = valtkund, summan = summan[0][0],FÖRNAMN=FÖRNAMN[0][0])
+    valtkund = valtkund, summan=summan[0][0],FÖRNAMN=FÖRNAMN[0][0])
 
 
 
