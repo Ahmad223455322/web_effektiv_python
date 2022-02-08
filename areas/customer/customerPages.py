@@ -130,14 +130,13 @@ def kundbild():
 def kontobild():
     sortColumn = request.args.get('sortColumn','ID')
     sortOrder = request.args.get('sortOrder','asc')
-    sort= sortering_kontobild(sortColumn,sortOrder)
-    id = request.args.get('id')
+    id = int(request.args.get('id'))
+    sort= sortering_kontobild(sortColumn,sortOrder,id)
     valtkund= Customer.query.get(id)
-    kontolist= db.session.query(Customer, Account).join(Account).where(Account.CustomerId == id).all()
     summan = db.session.query(func.sum(Account.Balance)).filter(Account.CustomerId == id).all()
     FÖRNAMN = db.session.query(Customer.GivenName).filter(Customer.Id==id).all()
-    return render_template("customer/kontobild.html",kontolist=kontolist,sort=sort, 
-    valtkund = valtkund, summan=summan[0][0],FÖRNAMN=FÖRNAMN[0][0])
+    return render_template("customer/kontobild.html",sort=sort, 
+    valtkund = valtkund, summan=summan[0][0],FÖRNAMN=FÖRNAMN[0][0],id=id)
 
 
 
@@ -146,13 +145,11 @@ def kontobild():
 def transaktionerbild():
     sortColumn = request.args.get('sortColumn','ID')
     sortOrder = request.args.get('sortOrder','asc')
-    sort= sortering_transaktionerbild(sortColumn,sortOrder)
-    id = request.args.get('id')
+    id = int(request.args.get('id'))
+    sort= sortering_transaktionerbild(sortColumn,sortOrder,id)
     valtkonto= Account.query.get(id)
-    transaktioner= db.session.query(Account,Transaction).join(Transaction).where(Transaction.AccountId == id).all()
     Saldo = db.session.query(Account.Balance).filter(Account.Id==id).all()
-    print(id)
-    return render_template("customer/transaktionerbild.html",transaktioner=transaktioner,sort=sort,valtkonto=valtkonto,Saldo=Saldo[0][0])
+    return render_template("customer/transaktionerbild.html",sort=sort,valtkonto=valtkonto,Saldo=Saldo[0][0],id=id)
 
 
 

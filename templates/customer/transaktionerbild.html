@@ -24,20 +24,20 @@
                 <tr>
                     <th class="tabel-heder">ID
                       <div class="icon-contener">
-                          <a  href="{{  url_for('customer.transaktionerbild',sortColumn='ID',sortOrder='asc' ) }}">
+                          <a  href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='ID',sortOrder='asc' ) }}">
                               <i class="fas fa-sort-up"></i>
                           </a>
-                          <a href="{{  url_for('customer.transaktionerbild',sortColumn='ID',sortOrder='desc' ) }}">
+                          <a href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='ID',sortOrder='desc' ) }}">
                               <i class="fas fa-sort-down"></i>
                           </a>
                       </div>
                     </th>  
                     <th class="tabel-heder">Typ
                       <div class="icon-contener">
-                          <a  href="{{  url_for('customer.transaktionerbild',sortColumn='Typ',sortOrder='asc' ) }}">
+                          <a  href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='Typ',sortOrder='asc' ) }}">
                               <i class="fas fa-sort-up"></i>
                           </a>
-                          <a href="{{  url_for('customer.transaktionerbild',sortColumn='Typ',sortOrder='desc' ) }}">
+                          <a href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='Typ',sortOrder='desc' ) }}">
                               <i class="fas fa-sort-down"></i>
                           </a>
                       </div>
@@ -45,40 +45,40 @@
                       
                     <th class="tabel-heder">Operation
                         <div class="icon-contener">
-                            <a  href="{{  url_for('customer.transaktionerbild',sortColumn='Operation',sortOrder='asc' ) }}">
+                            <a  href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='Operation',sortOrder='asc' ) }}">
                                 <i class="fas fa-sort-up"></i>
                             </a>
-                            <a href="{{  url_for('customer.transaktionerbild',sortColumn='Operation',sortOrder='desc' ) }}">
+                            <a href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='Operation',sortOrder='desc' ) }}">
                                 <i class="fas fa-sort-down"></i>
                             </a>
                         </div>
                     </th>    
                     <th class="tabel-heder">Datum
                         <div class="icon-contener">
-                            <a  href="{{  url_for('customer.transaktionerbild',sortColumn='Datum',sortOrder='asc' ) }}">
+                            <a  href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='Datum',sortOrder='asc' ) }}">
                                 <i class="fas fa-sort-up"></i>
                             </a>
-                            <a href="{{  url_for('customer.transaktionerbild',sortColumn='Datum',sortOrder='desc' ) }}">
+                            <a href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='Datum',sortOrder='desc' ) }}">
                                 <i class="fas fa-sort-down"></i>
                             </a>
                         </div>
                     </th>    
                     <th class="tabel-heder">Amount
                         <div class="icon-contener">
-                            <a  href="{{  url_for('customer.transaktionerbild',sortColumn='Amount',sortOrder='asc' ) }}">
+                            <a  href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='Amount',sortOrder='asc' ) }}">
                                 <i class="fas fa-sort-up"></i>
                             </a>
-                            <a href="{{  url_for('customer.transaktionerbild',sortColumn='Amount',sortOrder='desc' ) }}">
+                            <a href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='Amount',sortOrder='desc' ) }}">
                                 <i class="fas fa-sort-down"></i>
                             </a>
                         </div>
                     </th>    
                         <th class="tabel-heder">NewBalance
                             <div class="icon-contener">
-                                <a  href="{{  url_for('customer.transaktionerbild',sortColumn='NewBalance',sortOrder='asc' ) }}">
+                                <a  href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='NewBalance',sortOrder='asc' ) }}">
                                     <i class="fas fa-sort-up"></i>
                                 </a>
-                                <a href="{{  url_for('customer.transaktionerbild',sortColumn='NewBalance',sortOrder='desc' ) }}">
+                                <a href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='NewBalance',sortOrder='desc' ) }}">
                                     <i class="fas fa-sort-down"></i>
                                 </a>
                             </div>
@@ -86,10 +86,10 @@
 
                             <th class="tabel-heder">AccountId
                                 <div class="icon-contener">
-                                    <a  href="{{  url_for('customer.transaktionerbild',sortColumn='AccountId',sortOrder='asc' ) }}">
+                                    <a  href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='AccountId',sortOrder='asc' ) }}">
                                         <i class="fas fa-sort-up"></i>
                                     </a>
-                                    <a href="{{  url_for('customer.transaktionerbild',sortColumn='AccountId',sortOrder='desc' ) }}">
+                                    <a href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='AccountId',sortOrder='desc' ) }}">
                                         <i class="fas fa-sort-down"></i>
                                     </a>
                                 </div>
@@ -97,10 +97,10 @@
 
                             <th class="tabel-heder">Balance
                                 <div class="icon-contener">
-                                    <a  href="{{  url_for('customer.transaktionerbild',sortColumn='AccountId',sortOrder='asc' ) }}">
+                                    <a  href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='AccountId',sortOrder='asc' ) }}">
                                         <i class="fas fa-sort-up"></i>
                                     </a>
-                                    <a href="{{  url_for('customer.transaktionerbild',sortColumn='AccountId',sortOrder='desc' ) }}">
+                                    <a href="{{  url_for('customer.transaktionerbild',id=id,sortColumn='AccountId',sortOrder='desc' ) }}">
                                         <i class="fas fa-sort-down"></i>
                                     </a>
                                 </div>
@@ -112,7 +112,7 @@
                 </tr>
                 
                     
-                    {% for k,t in transaktioner %}
+                    {% for t in sort %}
                     
                     <tr>
                         <td> <a class="search-btn" href="{{ url_for('customer.transaktionerbild',id = t.Id) }}">{{t.Id}}</a></td>

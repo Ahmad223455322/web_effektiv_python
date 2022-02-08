@@ -1,7 +1,7 @@
 from model import db, Customer,Account,Transaction
-def sortering_transaktionerbild(sortColumn,sortOrder):
-   
-    allaPersoner = Transaction.query
+def sortering_transaktionerbild(sortColumn,sortOrder,id):
+    
+    allaPersoner = Transaction.query.filter_by(AccountId=id)
 
 
     if sortColumn == "ID":
@@ -50,9 +50,9 @@ def sortering_transaktionerbild(sortColumn,sortOrder):
 
     return allaPersoner   
 
-def sortering_kontobild(sortColumn,sortOrder):
+def sortering_kontobild(sortColumn,sortOrder,id):
    
-    allaPersoner = Account.query
+    allaPersoner = Account.query.filter_by(CustomerId=id)
 
 
     if sortColumn == "ID":
