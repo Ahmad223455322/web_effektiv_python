@@ -107,8 +107,8 @@ def sortering_kundbild(sortColumn,sortOrder, page, sök):
             allaPersoner = allaPersoner.order_by(Customer.GivenName.desc())
         else:
             allaPersoner = allaPersoner.order_by(Customer.GivenName.asc())
-
     
+
     if sortColumn == "Efternamn":
         if sortOrder == "desc":
             allaPersoner = allaPersoner.order_by(Customer.Surname.desc())

@@ -73,7 +73,7 @@ def insätning():
                 nytransktion.Type ="Debit"
                 nytransktion.Operation=val
                 nytransktion.Date=datetime.now()
-                nytransktion.Amount=belopp
+                nytransktion.Amount= int(belopp)
                 nytransktion.NewBalance=nyvärde
                 nytransktion.AccountId=konto.Id
                 konto.Balance= nyvärde
@@ -92,7 +92,7 @@ def insätning():
                 konto.Balance= nyvärde
                 db.session.add(nytransktion)
                 db.session.commit()
-                flash('tack')
+            flash("Tack operationen är genomfört", "success") # eller "danger" för röd error
             return redirect(url_for('customer.insätning',form=form))    
     return render_template('customer/insättning.html',form=form)
     
@@ -147,11 +147,11 @@ def transaktionerbild():
     sortColumn = request.args.get('sortColumn','ID')
     sortOrder = request.args.get('sortOrder','asc')
     sort= sortering_transaktionerbild(sortColumn,sortOrder)
-    
     id = request.args.get('id')
     valtkonto= Account.query.get(id)
     transaktioner= db.session.query(Account,Transaction).join(Transaction).where(Transaction.AccountId == id).all()
     Saldo = db.session.query(Account.Balance).filter(Account.Id==id).all()
+    print(id)
     return render_template("customer/transaktionerbild.html",transaktioner=transaktioner,sort=sort,valtkonto=valtkonto,Saldo=Saldo[0][0])
 
 

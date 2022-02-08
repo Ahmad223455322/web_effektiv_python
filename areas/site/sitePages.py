@@ -1,4 +1,5 @@
-from flask import Blueprint,render_template
+from flask import Blueprint,render_template,flash,redirect,url_for
+from flask_user import current_user
 from model import db, Customer,Account
 from sqlalchemy.sql import func
 siteBlueprint = Blueprint('site', __name__)

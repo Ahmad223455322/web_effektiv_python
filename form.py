@@ -14,8 +14,14 @@ class Instätning(FlaskForm):
     def validate_belopp(form,från):
         från=Account.query.get(form.från.data)
         belopp=form.belopp.data
-        if belopp > från.Balance:
+        if int(belopp) > int(från.Balance):
             raise validators.ValidationError("Beloppet är större än saldo")
+        
+    
+    def validate_belopp(form,belopp):
+        belopp=form.belopp.data    
+        if belopp == None:
+                raise validators.ValidationError("Detta fält måste fyllas")    
        
         
 
@@ -29,6 +35,12 @@ class Överförnig(FlaskForm):
     def validate_belopp(form,från):
         från=Account.query.get(form.från.data)
         belopp=form.belopp.data
-        if belopp > från.Balance:
+        if int(belopp) > int(från.Balance):
             raise validators.ValidationError("Beloppet är större än saldo")
+    
+    def validate_belopp(form,belopp):
+        belopp=form.belopp.data    
+        if belopp == None:
+                raise validators.ValidationError("Detta fält måste fyllas")    
        
+           
