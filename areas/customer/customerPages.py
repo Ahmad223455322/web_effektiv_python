@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,request,redirect, session,url_for,flash
+from flask import Blueprint,render_template,request,redirect,url_for,flash
 from flask_user import roles_required,roles_accepted
 from model import db, Customer,Account,Transaction
 from sqlalchemy.sql import func
