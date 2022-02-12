@@ -137,7 +137,7 @@ def kontobild():
     valtkund= Customer.query.get(id)
     summan = db.session.query(func.sum(Account.Balance)).filter(Account.CustomerId == id).all()
     FÖRNAMN = db.session.query(Customer.GivenName).filter(Customer.Id==id).all()
-    return render_template("customer/kontobild.html",sort=sort, 
+    return render_template("customer/Kontobild.html",sort=sort, 
     valtkund = valtkund, summan=summan[0][0],FÖRNAMN=FÖRNAMN[0][0],id=id)
 
 
@@ -145,8 +145,8 @@ def kontobild():
 @customerBlueprint.route("/transaktionerbild", methods=['GET', 'POST'])
 @roles_accepted("Admin","Cashier")
 def transaktionerbild():
-    sortColumn = request.args.get('sortColumn','ID')
-    sortOrder = request.args.get('sortOrder','asc')
+    sortColumn = request.args.get('sortColumn','Datum')
+    sortOrder = request.args.get('sortOrder','desc')
     id = int(request.args.get('id'))
     sort= sortering_transaktionerbild(sortColumn,sortOrder,id)
     valtkonto= Account.query.get(id)
