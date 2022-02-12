@@ -3,6 +3,7 @@ from flask_migrate import Migrate, upgrade
 from model import db, seedData,user_manager,User
 from areas.site.sitePages import siteBlueprint
 from areas.customer.customerPages import customerBlueprint
+from searchmotor import addDocuments,createIndex
 
 
  
@@ -24,6 +25,8 @@ if __name__  == "__main__":
     with app.app_context():
         upgrade()
         seedData()
+        # createIndex()
+        # addDocuments()
        
         
     app.run()

@@ -4,7 +4,9 @@ from model import db, Customer,Account,Transaction
 from sqlalchemy.sql import func
 from datetime import datetime
 from form import Instätning,Överförnig
+from searchmotor import client
 from .services import sortering_kontobild,sortering_kundbild,sortering_transaktionerbild
+
 
 customerBlueprint = Blueprint('customer', __name__)
 
@@ -15,7 +17,7 @@ customerBlueprint = Blueprint('customer', __name__)
 
 
 @customerBlueprint.route("/överföring", methods=['GET', 'POST'])
-# @roles_required("Admin")
+@roles_required("Admin")
 def överföring():
     
     form= Överförnig(request.form)
@@ -57,7 +59,7 @@ def överföring():
 
 
 @customerBlueprint.route("/insätning", methods=['GET', 'POST'])
-# @roles_required("Admin")
+@roles_required("Admin")
 def insätning():
   
     
@@ -100,7 +102,7 @@ def insätning():
 
 
 @customerBlueprint.route("/Kundbild", methods=['GET', 'POST'])
-# @roles_accepted("Admin","Cashier")
+@roles_accepted("Admin","Cashier")
 def kundbild():
     
     page=int(request.args.get('page','1'))   
@@ -126,7 +128,7 @@ def kundbild():
 
 
 @customerBlueprint.route("/kontobild", methods=['GET', 'POST'])
-# @roles_accepted("Admin","Cashier")
+@roles_accepted("Admin","Cashier")
 def kontobild():
     sortColumn = request.args.get('sortColumn','ID')
     sortOrder = request.args.get('sortOrder','asc')
@@ -141,7 +143,7 @@ def kontobild():
 
 
 @customerBlueprint.route("/transaktionerbild", methods=['GET', 'POST'])
-# @roles_accepted("Admin","Cashier")
+@roles_accepted("Admin","Cashier")
 def transaktionerbild():
     sortColumn = request.args.get('sortColumn','ID')
     sortOrder = request.args.get('sortOrder','asc')
@@ -153,3 +155,32 @@ def transaktionerbild():
 
 
 
+
+@customerBlueprint.route("/customer")
+def indexPage():
+    
+    sortColumn = request.args.get('sortColumn', 'Id')
+    sortOrder = request.args.get('sortOrder', 'asc')
+    page = int(request.args.get('page', 1,))
+    sök = request.args.get('sök','*')
+
+    skip = (page-1) * 50
+    result = client.search(search_text=sök,
+        include_total_count=True,skip=skip,
+        top=50,
+        order_by=sortColumn + ' '  + sortOrder )
+    summa= result.get_count()/50
+    antal_utan_procent= round(summa)   
+    top=50    
+
+    alla = result
+    return render_template('customer/customer.html', 
+    listOfCustomers=alla,
+    page=page,
+    sortColumn=sortColumn,
+    sortOrder=sortOrder,
+    search_text=sök,
+    skip=skip,
+    top=top,
+    antal_utan_procent=antal_utan_procent,
+    )

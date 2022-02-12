@@ -102,7 +102,7 @@ def seedData():
 
     
     antal =  Customer.query.count()
-    while antal < 5000:
+    while antal < 500:
         customer = Customer()
         
         customer.GivenName, customer.Surname = barnum.create_name()

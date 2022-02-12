@@ -1,6 +1,7 @@
 
 class ConfigDebug():
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:Ahmad123.@localhost/bank'    # File-based SQL database
+    #  SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:Ahmad123.@localhost/bank' 
+    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://Ahmad123:0931440973Zzzz12345@python.mysql.database.azure.com/web'    # File-based SQL database
     SECRET_KEY = 'SDFA11#'
 
 
