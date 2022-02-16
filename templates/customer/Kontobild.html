@@ -26,8 +26,9 @@
           <div class="info">
               <h3>Konto-sida</h3>
               
-              <table class="customers">
+              <table class="table">
                 <tr>
+                <thead>
                     <th class="tabel-heder">ID
                       <div class="icon-contener">
                           <a  href="{{  url_for('customer.kontobild',id=id, sortColumn='ID',sortOrder='asc' ) }}">
@@ -82,12 +83,13 @@
                         <th class="tabel-heder">Kontohavare
                              
                         </th>
+                </thead>      
 
-                </tr>
+                
                 
                   
                 {% for k in sort %}
-                  
+                <tbody>   
                 <tr>
                     <td><a class="search-btn" href="{{ url_for('customer.transaktionerbild',id = k.Id) }}">{{k.Id}} </a></td>
                     <td>{{k.AccountType}}</td>
@@ -96,6 +98,7 @@
                     <td>{{k.CustomerId}}</td>
                     
                 </tr>  
+              
                 {% endfor %}
                 <tr>
                     <td></td>
@@ -107,7 +110,7 @@
                 </tr>  
                 
                
-            
+            </tbody>
                 </table>
               
       </div>

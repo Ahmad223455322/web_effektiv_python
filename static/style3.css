@@ -87,12 +87,12 @@ header {
 
 .visa-btn{
     text-decoration: none;
-    color: #e84118;
+    color: #18e8aa;
     float: right;
     width: 40px;
     height: 30px;
     border-radius: 200%;
-    background:black;
+    background:rgb(0, 0, 0);
     display: flex;
     justify-content: center;
     align-items: center ;
@@ -129,7 +129,7 @@ section {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: url(https://www.globalverificationnetwork.com/wp-content/uploads/2020/06/financial-01-01.jpg)no-repeat;
+    background: url(https://assets.kpmg/is/image/kpmg/digital-blue-pattern-dark-background-banner:cq5dam.web.1400.350)no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -202,31 +202,6 @@ section {
     flex-wrap: wrap;
 
 }
-.customers{
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.customers td, #customers th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-
-.customers tr:nth-child(even){background-color: #f2f2f2;}
-
-.customers tr:hover {background-color:rgba(17, 0, 255, 0.582);}
-
-.customers th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: center;
-    background-color:rgb(79, 96, 148);
-    color: white;
-
-}
-
 
 
 
@@ -247,18 +222,15 @@ section {
 
 .card{
     background-color:floralwhite;
-    width: 105%;
+    width: 77%;
     box-shadow: 0 5px 25px rgba(1 1 1/15%);
     border-radius: 10px ;
     padding: 25px;
     margin: 15px;
+    box-sizing: border-box;
     /* transition: 0.7s ease; */
      
     
-}
-.card:hover{
-    /* transform: scale(1.1); */
-     
 }
 .icon{
     color: rgb(79, 96, 148);
@@ -415,8 +387,88 @@ section {
       box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
     } 
   
-  
+ 
 
+ 
+      
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+       
+      }
+      
+      .table td,
+      .table th {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        text-align: center;
+        font-size: 16px;
+      }
+      
+      .table th {
+        background-color: #92c9e6;
+        color: #ffffff;
+      }
+      
+      .table tbody tr:nth-child(even) {
+        background-color: #d1e8f5;
+        
+      }
+      
+       
+
+@media(max-width: 900px) {
+        .table thead {
+          display: none;
+        }
+      
+        .table,
+        .table tbody,
+        .table tr,
+        .table td {
+          display: block;
+          width: 100%;
+        }
+        .table tr {
+          margin-bottom: 15px;
+        }
+        .table td {
+          text-align: center;
+          position: relative;
+        }
+        .table td::before {
+          content: attr(data-label);
+          position: absolute;
+          left: 0;
+          width: 50%;
+          padding-left: 15px;
+          font-size: 15px;
+          font-weight: bold;
+          text-align: center;
+
+        }
+        .search-box{
+            left: 20px;
+        }
+        .search-btn{
+            transition: none;
+            float: none;
+           
+        }
+        .search-box{
+            transform: translate(- 0%,-0%);
+        }
+        .search-txt{
+            background-color: white;
+        }
+    
+    
+       
+      
+    } 
+      
+      
+      
 @media(max-width:1023px){
     header{
         padding: 12px 20px;
@@ -430,4 +482,110 @@ section {
     section{
         padding: 80px 20px;
     }
+    .customers{
+       width: 10%;
+       background-color: brown;
+    }
+    
+    .main-content h2{
+        font-size: 1em;
+
+    }
+
+    .main-content h3{
+        font-size: 1.6em;
+        
+    }
+    .content{
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .table td {
+        
+        text-align: center;
+        
+      }
+  
+      .table td::before{
+          text-align: center;
+      }  
+
+}
+
+
+
+@media(max-width:641px){
+    body{
+        font-size: 12px;
+
+    }
+    .main-content h2{
+        font-size: 0.8em;
+    } 
+    
+    .main-content h3{
+        font-size: 1.4em;
+    } 
+    
+    
+    .table td {
+        
+        text-align: center;
+        
+      }
+      .table td::before{
+          text-align: center;
+      }
+
+
+}
+
+
+
+@media(min-width:300px) and (max-width:600px) {
+    header{
+       display: flex;
+       justify-content: space-between;
+    }
+    
+    
+    body{
+        font-size: 10px;
+
+    }
+    .main-content h2{
+        font-size: 0.8em;
+    } 
+    
+    .main-content h3{
+        font-size: 1.4em;
+    } 
+
+    .operation-btn{
+        width: 50%;
+        height: 30%px;
+        appearance: none;
+        
+    }
+
+    .navigation a{
+        padding: 0px;
+
+    }
+
+
+    
+    .table td {
+        
+        text-align: center;
+        
+      }
+
+      .table td::before{
+          text-align: center;
+      }  
+  
+
 }

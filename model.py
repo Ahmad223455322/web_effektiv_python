@@ -205,7 +205,9 @@ def AddLoginIfNotExists(email:str, passwd:str, roles:list[str]):
     user = User()
     user.email=email
     user.email_confirmed_at=datetime.utcnow()
-    user.password=user_manager.hash_password(passwd)    
+    user.password=user_manager.hash_password(passwd)
+    
+
     for roleName in roles:
         role = Role.query.filter(Role.name == roleName).first()
         user.roles.append(role)
