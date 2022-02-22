@@ -1,6 +1,6 @@
 from email import message
 from flask_wtf import FlaskForm
-from wtforms import Form, validators,SelectField,FloatField
+from wtforms import Form, validators,SelectField
 from wtforms.fields import IntegerField
 from model import Account
 
