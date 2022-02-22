@@ -29,7 +29,7 @@ if __name__  == "__main__":
         # addDocuments()
        
         
-    app.run()
+    app.run(host="127.0.0.1", port=5000, debug=True)
 
 
 
