@@ -5,7 +5,7 @@
   <a href="#" class="logo"><i class="fas fa-university"></i> Bitcoin Banken</a>
     <nav class="navigation ">
      
-      <a href="#">Visar sidan {{ page }} av totalt {{ pages }}</a>
+      <a href="#">Visar sidan {{ page }} av totalt {{ antal_utan_procent }}</a>
       
     </nav>
 </header>
@@ -31,47 +31,45 @@
     </div>  
           <div class="info">
               <h3>Kund-Uppgifter</h3>
-              <table class="table">
+              <table class="customers">
                 <tr>
-                <thead>
                 <th class="tabel-heder">ID
                       <div class="icon-contener">
-                        <a  href="{{  url_for('customer.kundbild',sortColumn='ID',sortOrder='asc',sök=sök ) }}">
+                        <a  href="{{  url_for('customer.indexPage',sortColumn='Id',sortOrder='asc',sök=sök ) }}">
                             <i class="fas fa-sort-up"></i>
                         </a>
-                        <a href="{{  url_for('customer.kundbild',sortColumn='ID',sortOrder='desc',sök=sök ) }}">
+                        <a href="{{  url_for('customer.indexPage',sortColumn='Id',sortOrder='desc',sök=sök ) }}">
                             <i class="fas fa-sort-down"></i>
                         </a>
                       </div>
                     </th>
-
                 <th class="tabel-heder">Förnamn
                   <div class="icon-contener">
-                      <a  href="{{  url_for('customer.kundbild',sortColumn='Förnamn',sortOrder='asc' ,sök=sök) }}">
+                      <a  href="{{  url_for('customer.indexPage',sortColumn='GivenName',sortOrder='asc' ,sök=sök) }}">
                           
                         <i class="fas fa-sort-up"></i>
                       </a>
-                      <a href="{{  url_for('customer.kundbild',sortColumn='Förnamn',sortOrder='desc',sök=sök ) }}">
+                      <a href="{{  url_for('customer.indexPage',sortColumn='GivenName',sortOrder='desc',sök=sök ) }}">
                         <i class="fas fa-sort-down"></i>
                       </a>
                   </div>    
                 </th>
                 <th class="tabel-heder">Efternamn
                     <div class="icon-contener">
-                      <a  href="{{  url_for('customer.kundbild',sortColumn='Efternamn',sortOrder='asc' ,sök=sök) }}">
+                      <a  href="{{  url_for('customer.indexPage',sortColumn='Surname',sortOrder='asc' ,sök=sök) }}">
                         <i class="fas fa-sort-up"></i>
                       </a>
-                      <a href="{{  url_for('customer.kundbild',sortColumn='Efternamn',sortOrder='desc' ,sök=sök) }}">
+                      <a href="{{  url_for('customer.indexPage',sortColumn='Surname',sortOrder='desc' ,sök=sök) }}">
                          <i class="fas fa-sort-down"></i>
                       </a>
                     </div> 
                 </th>
                 <th class="tabel-heder">Adress
                   <div class="icon-contener" >
-                      <a  href="{{  url_for('customer.kundbild',sortColumn='Adress',sortOrder='asc',sök=sök ) }}">
+                      <a  href="{{  url_for('customer.indexPage',sortColumn='Streetaddress',sortOrder='asc',sök=sök ) }}">
                           <i class="fas fa-sort-up"></i>
                       </a>
-                      <a href="{{  url_for('customer.kundbild',sortColumn='Adress',sortOrder='desc',sök=sök ) }}">
+                      <a href="{{  url_for('customer.indexPage',sortColumn='Streetaddress',sortOrder='desc',sök=sök ) }}">
                          <i class="fas fa-sort-down"></i>
                       </a>
                     </div>  
@@ -79,51 +77,58 @@
                 <th class="tabel-heder"> Stad
                     <div class="icon-contener">
                       
-                      <a  href="{{  url_for('customer.kundbild',sortColumn='Stad',sortOrder='asc',sök=sök ) }}">
+                      <a  href="{{  url_for('customer.indexPage',sortColumn='City',sortOrder='asc',sök=sök ) }}">
                             <i class="fas fa-sort-up"></i>
                       </a>
-                      <a href="{{  url_for('customer.kundbild',sortColumn='Stad',sortOrder='desc',sök=sök ) }}">
+                      <a href="{{  url_for('customer.indexPage',sortColumn='City',sortOrder='desc',sök=sök ) }}">
                             <i class="fas fa-sort-down"></i>
                       </a>
                     </div>  
                 </th>
                 <th class="tabel-heder">Land
                   <div class="icon-contener"> 
-                      <a  href="{{  url_for('customer.kundbild',sortColumn='Land',sortOrder='asc',sök=sök ) }}">
+                      <a  href="{{  url_for('customer.indexPage',sortColumn='Country',sortOrder='asc',sök=sök ) }}">
                           <i class="fas fa-sort-up"></i>
                       </a>
-                      <a href="{{  url_for('customer.kundbild',sortColumn='Land',sortOrder='desc',sök=sök ) }}">
+                      <a href="{{  url_for('customer.indexPage',sortColumn='Country',sortOrder='desc',sök=sök ) }}">
                        <i class="fas fa-sort-down"></i>
                       </a>
                   </div>    
                 </th>
-                
-                <th class="tabel-heder" >Telefon
+                <th class="tabel-heder"> Email
                   <div class="icon-contener">
-                      <a  href="{{  url_for('customer.kundbild',sortColumn='Telefon',sortOrder='asc',sök=sök ) }}">
+                     <a  href="{{  url_for('customer.indexPage',sortColumn='EmailAddress',sortOrder='asc' ,sök=sök) }}">
+                          <i class="fas fa-sort-up"></i>
+                     </a>
+                     <a href="{{  url_for('customer.indexPage',sortColumn='EmailAddress',sortOrder='desc' ,sök=sök) }}">
+                        <i class="fas fa-sort-down"></i>
+                     </a>
+                  </div>   
+                </th>
+                <th class="tabel-heder">Telefon
+                  <div class="icon-contener">
+                      <a  href="{{  url_for('customer.indexPage',sortColumn='Telephone',sortOrder='asc',sök=sök ) }}">
                           <i class="fas fa-sort-up"></i>
                       </a>
                       
-                      <a href="{{  url_for('customer.kundbild',sortColumn='Telefon',sortOrder='desc' ,sök=sök) }}">
+                      <a href="{{  url_for('customer.indexPage',sortColumn='Telephone',sortOrder='desc' ,sök=sök) }}">
                           <i class="fas fa-sort-down"></i>
                       </a>
                   </div>    
                 </th>
                 <th class="tabel-heder"> Personnummer
                   <div class="icon-contener">
-                      <a  href="{{  url_for('customer.kundbild',sortColumn='Personnummer',sortOrder='asc',sök=sök ) }}">
+                      <a  href="{{  url_for('customer.indexPage',sortColumn='Birthday',sortOrder='asc',sök=sök ) }}">
                             <i class="fas fa-sort-up"></i>
                       </a>
-                      <a href="{{  url_for('customer.kundbild',sortColumn='Personnummer',sortOrder='desc',sök=sök ) }}">
+                      <a href="{{  url_for('customer.indexPage',sortColumn='Birthday',sortOrder='desc',sök=sök ) }}">
                             <i class="fas fa-sort-down"></i>
                       </a>
                   </div>    
                 </th>
-            </thead>  
+         
 
-                
-            {% for data in listOfCustomers %}
-              <tbody>
+                  {% for data in listOfCustomers %}
                 <tr>
                     <td><a class="search-btn" href="{{ url_for('customer.kontobild',id = data.Id, sortColumn=sortColumn, sortOrder=sortOrder,sök=sök) }}">{{data.Id}} </a> </td>
                     <td>{{data.GivenName}}</td>
@@ -131,18 +136,18 @@
                     <td>{{data.Streetaddress}}</td>
                     <td>{{data.City}}</td>
                     <td>{{data.Country}}</td>
+                    <td>{{data.EmailAddress}}</td>
                     <td>{{data.Telephone}}</td>
                     <td>{{data.Birthday}} </td>
                    
                  
                 </tr>
-             
                   {% endfor %}
                   <tfooter>
                     <tr>
                       <td>
-                        {% if has_prev %}
-                            <a class="main-btn" href="{{ url_for('customer.kundbild', page=page-1, sortColumn=sortColumn, sortOrder=sortOrder, sök=sök ) }}">
+                        {%if page > 1 %}
+                            <a class="main-btn" href="{{ url_for('customer.indexPage',skip=skip, top=top, page=page-1, sortColumn=sortColumn, sortOrder=sortOrder, sök=sök ) }}">
                                 Prev                                
                             </a>
                         {% endif %}
@@ -153,14 +158,14 @@
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td>{% if has_next %}
-                        <a class="main-btn" href="{{ url_for('customer.kundbild', page=page+1, sortColumn=sortColumn, sortOrder=sortOrder,sök=sök) }}">
+                      <td></td>
+                      <td>{% if page < antal_utan_procent %}
+                        <a class="main-btn" href="{{ url_for('customer.indexPage', skip=skip, top=top ,  page=page+1, sortColumn=sortColumn, sortOrder=sortOrder,sök=sök) }}">
                             Next                                
                         </a>
                     {% endif %}
 </td>
                     </tr>
-                  </tbody>
                   </tfooter>
                 </table>
               
