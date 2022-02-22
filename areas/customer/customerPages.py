@@ -51,6 +51,7 @@ def överföring():
             db.session.add(nyöverföring_1)
             db.session.add(nyöverföring_2)
             db.session.commit()
+            flash("Tack operationen är genomfört", "success")
             return redirect(url_for('customer.överföring',form=form))    
     return render_template('customer/överföring.html',form=form)
     
