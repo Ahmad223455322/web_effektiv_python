@@ -19,7 +19,7 @@ class AccountTestCases(unittest.TestCase):
         url = '/insätning'
         with test_client:
             response = test_client.post(url, data={ "från":"1", "val":"withdraw", "belopp":"16000" })
-            assert response.status_code != 302
+            assert response.status_code == 302
 
 
 
@@ -29,7 +29,7 @@ class AccountTestCases(unittest.TestCase):
         url = '/insätning'
         with test_client:
             response = test_client.post(url, data={"från":"1", "val":"deposit", "belopp":"16000"  })
-            assert response.status_code != 302
+            assert response.status_code == 302
 
 
 
@@ -49,8 +49,8 @@ class AccountTestCases(unittest.TestCase):
         test_client = app.test_client()
         url = '/överföring'
         with test_client:
-            response = test_client.post(url, data={ "från":"1", "till":"13", "belopp":"16000" })
-            assert response.status_code != 302
+            response = test_client.post(url, data={ "från":"1", "till":"13", "belopp":"14000" })
+            assert response.status_code == 302
 
 
 
@@ -62,7 +62,7 @@ class AccountTestCases(unittest.TestCase):
         url = '/insätning'
         with test_client:
             response = test_client.post(url, data={"från":"1", "val":"withdraw", "belopp":"-5"  })
-            assert response.status_code != 302
+            assert response.status_code == 302
 
 
 if __name__ == "__main__":
