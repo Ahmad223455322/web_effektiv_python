@@ -56,26 +56,7 @@
                       </a>
                   </div>    
                 </th>
-                <th class="tabel-heder">Efternamn
-                    <div class="icon-contener">
-                      <a  href="{{  url_for('customer.kundbild',sortColumn='Efternamn',sortOrder='asc' ,sök=sök) }}">
-                        <i class="fas fa-sort-up"></i>
-                      </a>
-                      <a href="{{  url_for('customer.kundbild',sortColumn='Efternamn',sortOrder='desc' ,sök=sök) }}">
-                         <i class="fas fa-sort-down"></i>
-                      </a>
-                    </div> 
-                </th>
-                <th class="tabel-heder">Adress
-                  <div class="icon-contener" >
-                      <a  href="{{  url_for('customer.kundbild',sortColumn='Adress',sortOrder='asc',sök=sök ) }}">
-                          <i class="fas fa-sort-up"></i>
-                      </a>
-                      <a href="{{  url_for('customer.kundbild',sortColumn='Adress',sortOrder='desc',sök=sök ) }}">
-                         <i class="fas fa-sort-down"></i>
-                      </a>
-                    </div>  
-                </th>
+          
                 <th class="tabel-heder"> Stad
                     <div class="icon-contener">
                       
@@ -87,56 +68,17 @@
                       </a>
                     </div>  
                 </th>
-                <th class="tabel-heder">Land
-                  <div class="icon-contener"> 
-                      <a  href="{{  url_for('customer.kundbild',sortColumn='Land',sortOrder='asc',sök=sök ) }}">
-                          <i class="fas fa-sort-up"></i>
-                      </a>
-                      <a href="{{  url_for('customer.kundbild',sortColumn='Land',sortOrder='desc',sök=sök ) }}">
-                       <i class="fas fa-sort-down"></i>
-                      </a>
-                  </div>    
-                </th>
-                
-                <th class="tabel-heder" >Telefon
-                  <div class="icon-contener">
-                      <a  href="{{  url_for('customer.kundbild',sortColumn='Telefon',sortOrder='asc',sök=sök ) }}">
-                          <i class="fas fa-sort-up"></i>
-                      </a>
-                      
-                      <a href="{{  url_for('customer.kundbild',sortColumn='Telefon',sortOrder='desc' ,sök=sök) }}">
-                          <i class="fas fa-sort-down"></i>
-                      </a>
-                  </div>    
-                </th>
-                <th class="tabel-heder"> Personnummer
-                  <div class="icon-contener">
-                      <a  href="{{  url_for('customer.kundbild',sortColumn='Personnummer',sortOrder='asc',sök=sök ) }}">
-                            <i class="fas fa-sort-up"></i>
-                      </a>
-                      <a href="{{  url_for('customer.kundbild',sortColumn='Personnummer',sortOrder='desc',sök=sök ) }}">
-                            <i class="fas fa-sort-down"></i>
-                      </a>
-                  </div>    
-                </th>
+           
             </thead>  
 
                 
             {% for data in listOfCustomers %}
               <tbody>
                 <tr>
-                    <td><a class="search-btn" href="{{ url_for('customer.kontobild',id = data.Id, sortColumn=sortColumn, sortOrder=sortOrder,sök=sök) }}">{{data.Id}} </a> </td>
-                    <td>{{data.GivenName}}</td>
-                    <td>{{data.Surname}}</td>
-                    <td>{{data.Streetaddress}}</td>
-                    <td>{{data.City}}</td>
-                    <td>{{data.Country}}</td>
-                    <td>{{data.Telephone}}</td>
-                    <td>{{data.Birthday}} </td>
-                   
-                 
-                </tr>
-             
+                  <td><a class="search-btn" href="{{ url_for('customer.kontobild',id = data.Id) }}">{{data.Id}} </a></td>
+                  <td>{{data.GivenName}}</td>
+                  <td>{{data.City}}</td>
+              </tr>  
                   {% endfor %}
                   <tfooter>
                     <tr>

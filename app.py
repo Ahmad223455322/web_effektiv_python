@@ -22,7 +22,7 @@ app.register_blueprint(customerBlueprint)
 
 
 if __name__  == "__main__":
-    with app.app_context():
+    with app.app_context(): 
         upgrade()
         seedData()
         # createIndex()

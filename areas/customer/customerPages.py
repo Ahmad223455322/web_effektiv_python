@@ -139,7 +139,7 @@ def kontobild():
     summan = db.session.query(func.sum(Account.Balance)).filter(Account.CustomerId == id).all()
     FÖRNAMN = db.session.query(Customer.GivenName).filter(Customer.Id==id).all()
     return render_template("customer/Kontobild.html",sort=sort, 
-    valtkund = valtkund, summan=summan[0][0],FÖRNAMN=FÖRNAMN[0][0],id=id)
+    valtkund = valtkund, summan=summan[0][0],FÖRNAMN=FÖRNAMN,id=id)
 
 
 

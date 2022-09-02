@@ -11,17 +11,17 @@ class Customer(db.Model):
     __tablename__= "Customers"
     Id = db.Column(db.Integer, primary_key=True)
     GivenName = db.Column(db.String(50), unique=False, nullable=False)
-    Surname = db.Column(db.String(50), unique=False, nullable=False)
-    Streetaddress = db.Column(db.String(50), unique=False, nullable=False)
+    # Surname = db.Column(db.String(50), unique=False, nullable=False)
+    # Streetaddress = db.Column(db.String(50), unique=False, nullable=False)
     City = db.Column(db.String(50), unique=False, nullable=False)
-    Zipcode = db.Column(db.String(10), unique=False, nullable=False)
+    # Zipcode = db.Column(db.String(10), unique=False, nullable=False)
     Country = db.Column(db.String(30), unique=False, nullable=False)
-    CountryCode = db.Column(db.String(2), unique=False, nullable=False)
+    # CountryCode = db.Column(db.String(2), unique=False, nullable=False)
     Birthday = db.Column(db.DateTime, unique=False, nullable=False)
-    NationalId = db.Column(db.String(20), unique=False, nullable=False)
-    TelephoneCountryCode = db.Column(db.Integer, unique=False, nullable=False)
+    # NationalId = db.Column(db.String(20), unique=False, nullable=False)
+    # TelephoneCountryCode = db.Column(db.Integer, unique=False, nullable=False)
     Telephone = db.Column(db.String(20), unique=False, nullable=False)
-    EmailAddress = db.Column(db.String(50), unique=False, nullable=False)
+    Yrke = db.Column(db.String(50), unique=False, nullable=False)
 
     Accounts = db.relationship('Account', backref='Customer',
      lazy=True)
@@ -105,18 +105,18 @@ def seedData():
     while antal < 500:
         customer = Customer()
         
-        customer.GivenName, customer.Surname = barnum.create_name()
+        customer.GivenName = barnum.create_name()[0]
 
-        customer.Streetaddress = barnum.create_street()
-        customer.Zipcode, customer.City, _  = barnum.create_city_state_zip()
+        # customer.Streetaddress = barnum.create_street()
+        customer.City = barnum.create_city_state_zip()[1]
         customer.Country = "USA"
-        customer.CountryCode = "US"
+        # customer.CountryCode = "US"
         customer.Birthday = barnum.create_birthday()
         n = barnum.create_cc_number()
-        customer.NationalId = customer.Birthday.strftime("%Y%m%d-") + n[1][0][0:4]
-        customer.TelephoneCountryCode = 55
+        # customer.NationalId = customer.Birthday.strftime("%Y%m%d-") + n[1][0][0:4]
+        # customer.TelephoneCountryCode = 55
         customer.Telephone = barnum.create_phone()
-        customer.EmailAddress = barnum.create_email().lower()
+        customer.Yrke = barnum.create_job_title()
 
         for x in range(random.randint(1,4)):
             account = Account()

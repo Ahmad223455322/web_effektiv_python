@@ -122,6 +122,13 @@ def sortering_kundbild(sortColumn,sortOrder, page, sök):
         else:
             allaPersoner = allaPersoner.order_by(Customer.Streetaddress.asc())
     
+
+    if sortColumn == "Yrke":
+        if sortOrder == "desc":
+            allaPersoner = allaPersoner.order_by(Customer.Yrke.desc())
+        else:
+            allaPersoner = allaPersoner.order_by(Customer.Yrke.asc())
+    
     if sortColumn == "Stad":
         if sortOrder == "desc":
             allaPersoner = allaPersoner.order_by(Customer.City.desc())
@@ -154,7 +161,7 @@ def sortering_kundbild(sortColumn,sortOrder, page, sök):
         else:
             allaPersoner = allaPersoner.order_by(Customer.Birthday.asc())
            
-    paginationObject = allaPersoner.paginate(page,50,False)
+    paginationObject = allaPersoner.paginate(page,20,False)
 
     return paginationObject
  
