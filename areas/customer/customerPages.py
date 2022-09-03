@@ -6,6 +6,8 @@ from datetime import datetime
 from form import Instätning,Överförnig
 from searchmotor import client
 from .services import sortering_kontobild,sortering_kundbild,sortering_transaktionerbild
+from LRU_cach import LRUCache
+
 
 
 customerBlueprint = Blueprint('customer', __name__)
@@ -105,15 +107,27 @@ def insätning():
 @customerBlueprint.route("/Kundbild", methods=['GET', 'POST'])
 @roles_accepted("Admin","Cashier")
 def kundbild():
-    
-    page=int(request.args.get('page','1'))   
+    lru_id = int(request.args.get('id'))
+
+    page=int(request.args.get('page','1'))
+
     sök=request.args.get('sök','')
+
     sortColumn = request.args.get('sortColumn','ID')
+
     sortOrder = request.args.get('sortOrder','asc')
+
+    lru= LRUCache(50)
+
+    hittad=lru.get(lru_id)
+
+    if hittad == -1:
+        pass #databas
     
     paginationObject=sortering_kundbild(sortColumn,sortOrder, page, sök)
     databas = Customer.query.all()
     return render_template("customer/Kundbild.html",
+                    hittad=hittad,
                     databas=databas,
                     listOfCustomers=paginationObject.items, 
                     page=page,
