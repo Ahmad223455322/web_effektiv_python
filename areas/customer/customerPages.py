@@ -145,8 +145,6 @@ def kontobild():
     sortOrder = request.args.get('sortOrder','asc')
     id = int(request.args.get('id'))
 
-    
-    
     hittad = Lru_klass.get(id)
     if hittad == -1 :
         time.sleep(5)
