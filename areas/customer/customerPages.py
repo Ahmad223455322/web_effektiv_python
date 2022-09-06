@@ -6,12 +6,11 @@ from datetime import datetime
 from form import Instätning,Överförnig
 from searchmotor import client
 from .services import sortering_kontobild,sortering_kundbild,sortering_transaktionerbild
-from LRU_cach import LRUCache
-
-
+from areas.customer.LRU_cach import LRUCache
+import time
 
 customerBlueprint = Blueprint('customer', __name__)
-
+Lru_klass = LRUCache(50)
 
 
 
@@ -107,7 +106,7 @@ def insätning():
 @customerBlueprint.route("/Kundbild", methods=['GET', 'POST'])
 @roles_accepted("Admin","Cashier")
 def kundbild():
-    lru_id = int(request.args.get('id'))
+
 
     page=int(request.args.get('page','1'))
 
@@ -117,17 +116,14 @@ def kundbild():
 
     sortOrder = request.args.get('sortOrder','asc')
 
-    lru= LRUCache(50)
 
-    hittad=lru.get(lru_id)
 
-    if hittad == -1:
-        pass #databas
-    
+
+
+    Lru_klass = LRUCache(50)
     paginationObject=sortering_kundbild(sortColumn,sortOrder, page, sök)
     databas = Customer.query.all()
     return render_template("customer/Kundbild.html",
-                    hittad=hittad,
                     databas=databas,
                     listOfCustomers=paginationObject.items, 
                     page=page,
@@ -148,8 +144,18 @@ def kontobild():
     sortColumn = request.args.get('sortColumn','ID')
     sortOrder = request.args.get('sortOrder','asc')
     id = int(request.args.get('id'))
+
+    
+    
+    hittad = Lru_klass.get(id)
+    if hittad == -1 :
+        time.sleep(5)
+        valtkund= Customer.query.get(id)
+        Lru_klass.put(id,valtkund)
+    else:
+        valtkund = hittad   
+    
     sort= sortering_kontobild(sortColumn,sortOrder,id)
-    valtkund= Customer.query.get(id)
     summan = db.session.query(func.sum(Account.Balance)).filter(Account.CustomerId == id).all()
     FÖRNAMN = db.session.query(Customer.GivenName).filter(Customer.Id==id).all()
     return render_template("customer/Kontobild.html",sort=sort, 

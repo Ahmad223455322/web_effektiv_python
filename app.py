@@ -6,7 +6,7 @@ from areas.customer.customerPages import customerBlueprint
 from searchmotor import addDocuments,createIndex
 
 
- 
+
 app = Flask(__name__)
 app.config.from_object('config.ConfigDebug')
 
