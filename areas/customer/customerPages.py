@@ -10,7 +10,8 @@ from areas.customer.LRU_cach import LRUCache
 import time
 
 customerBlueprint = Blueprint('customer', __name__)
-Lru_klass = LRUCache(50)
+Lru_klass = LRUCache(3)
+
 
 
 
