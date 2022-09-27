@@ -1,4 +1,9 @@
+import re
 from model import db, Customer,Account,Transaction
+from areas.customer.LRU_cach import LRUCache
+import time
+
+Lru_klass = LRUCache(3)
 def sortering_transaktionerbild(sortColumn,sortOrder,id):
     
     allaPersoner = Transaction.query.filter_by(AccountId=id)
@@ -166,3 +171,29 @@ def sortering_kundbild(sortColumn,sortOrder, page, sök):
     return paginationObject
  
  
+def customer_decorator(functionaliasset):
+    def wrapper(id):
+        hittad = Lru_klass.get_cash(id)
+        if hittad == -1 :
+            valtkund = functionaliasset(id)
+            Lru_klass.put(id,valtkund)
+            return valtkund    
+        return hittad
+    return wrapper         
+
+
+@customer_decorator
+def sleep_fun(id):
+    time.sleep(5)
+    valtkund= Customer.query.get(id)
+    return valtkund
+
+# def timing_decerator(functionaliasset):
+#     def wrapper(*args,**kwargs):
+#         start= default_timer
+#         res=functionaliasset(*args,**kwargs)
+#         end= default_timer
+#         print(f'det tog {end-start}såhär mycket tid')
+#         return res
+#     return wrapper
+

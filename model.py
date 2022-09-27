@@ -90,8 +90,7 @@ user_manager = UserManager(None, db, User)
 
 
 
-
-def seedData():
+def Generate():
 
 
 
@@ -102,7 +101,7 @@ def seedData():
 
     
     antal =  Customer.query.count()
-    while antal < 500:
+    while antal < 501:
         customer = Customer()
         
         customer.GivenName = barnum.create_name()[0]
@@ -175,11 +174,18 @@ def seedData():
 
 
             customer.Accounts.append(account)
+        yield customer
 
+def Save(customer):
         db.session.add(customer)
         db.session.commit()
-        
-        antal = antal + 1
+            
+
+    
+
+       
+
+
 
 
 
@@ -214,7 +220,6 @@ def AddLoginIfNotExists(email:str, passwd:str, roles:list[str]):
 
     db.session.add(user)
     db.session.commit()
-
 
 
 

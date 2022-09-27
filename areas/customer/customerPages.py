@@ -5,7 +5,7 @@ from sqlalchemy.sql import func
 from datetime import datetime
 from form import Instätning,Överförnig
 from searchmotor import client
-from .services import sortering_kontobild,sortering_kundbild,sortering_transaktionerbild
+from .services import sortering_kontobild,sortering_kundbild,sortering_transaktionerbild,sleep_fun
 from areas.customer.LRU_cach import LRUCache
 import time
 
@@ -145,20 +145,16 @@ def kontobild():
     sortColumn = request.args.get('sortColumn','ID')
     sortOrder = request.args.get('sortOrder','asc')
     id = int(request.args.get('id'))
-
-    hittad = Lru_klass.get(id)
-    if hittad == -1 :
-        time.sleep(5)
-        valtkund= Customer.query.get(id)
-        Lru_klass.put(id,valtkund)
-    else:
-        valtkund = hittad   
     
+
+    valtkund= sleep_fun(id)
     sort= sortering_kontobild(sortColumn,sortOrder,id)
     summan = db.session.query(func.sum(Account.Balance)).filter(Account.CustomerId == id).all()
     FÖRNAMN = db.session.query(Customer.GivenName).filter(Customer.Id==id).all()
-    return render_template("customer/Kontobild.html",sort=sort, 
+    return render_template("customer/Kontobild.html",sort=sort,
     valtkund = valtkund, summan=summan[0][0],FÖRNAMN=FÖRNAMN,id=id)
+
+
 
 
 

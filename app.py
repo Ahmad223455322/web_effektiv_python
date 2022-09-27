@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask_migrate import Migrate, upgrade
-from model import db, seedData,user_manager,User
+from model import db,Save,Generate,user_manager,User
 from areas.site.sitePages import siteBlueprint
 from areas.customer.customerPages import customerBlueprint
 from searchmotor import addDocuments,createIndex
@@ -24,7 +24,8 @@ app.register_blueprint(customerBlueprint)
 if __name__  == "__main__":
     with app.app_context(): 
         upgrade()
-        seedData()
+        for person_g in Generate():
+            Save(person_g)
         # createIndex()
         # addDocuments()
        

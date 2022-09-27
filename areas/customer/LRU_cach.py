@@ -8,7 +8,7 @@ class LRUCache:
 
 
 
-	def get(self, key: int) -> int:
+	def get_cash(self, key: int) -> int:
 		if key not in self.cache:
 			return -1
 		else:
