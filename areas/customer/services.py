@@ -1,4 +1,3 @@
-import re
 from model import db, Customer,Account,Transaction
 from areas.customer.LRU_cach import LRUCache
 import time
